@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ElaCompilBleBox"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="wLightBox App" Height="900" Width="450">
+        Title="wLightBox App" Height="910" Width="450">
     <StackPanel>
         <StackPanel Background="#556190" VerticalAlignment="Top">
         <Label HorizontalAlignment="Center" FontWeight="Bold" Foreground="#229ad7">
@@ -16,7 +16,7 @@
         <StackPanel Orientation="Horizontal">
             <Label>Enter device adress:</Label>
             <TextBox x:Name="DeviceAdress" Text="192.168.1.11" VerticalAlignment="Center" />
-            <Button x:Name="Connect" Content="Connect" Margin="20,0,0,0"/>
+            <Button x:Name="Connect" Click="Connect_Click" Content="Connect" Margin="20,0,0,0"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label>Device Name:</Label>
@@ -40,9 +40,9 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label>Color Mode:</Label>
-            <TextBlock x:Name="ActualColorMode" Text="1:RGBW" VerticalAlignment="Center" Background="Aqua" />
+            <TextBlock x:Name="ActualColorMode" Text="RGBW" VerticalAlignment="Center" Background="Aqua" />
             <Label>Effect:</Label>
-            <TextBlock x:Name="ActualEffectId" Text="2:RGB" VerticalAlignment="Center" Background="Aqua"/>
+            <TextBlock x:Name="ActualEffectId" Text="RGB" VerticalAlignment="Center" Background="Aqua"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label>Color Fade:</Label>
@@ -63,73 +63,78 @@
             </Label>
         </StackPanel>
         <Label>Set Color Mode:</Label>
+        <TextBlock x:Name="ColorModeToSet" Background="Aqua" />
         <StackPanel Orientation="Horizontal">
-            <RadioButton x:Name = "Cm1" Content = "1:RGBW" HorizontalAlignment = "Left"  
+            <RadioButton x:Name = "Cm1" Content = "1: RGBW" HorizontalAlignment = "Left"  
              Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "ColorMode" Width = "69" IsChecked="True"/>
+             GroupName = "ColorMode" Width = "75" IsChecked="True" Checked = "Handle_Checked_Color" />
 
-            <RadioButton x:Name = "Cm2" Content = "2:RGB" HorizontalAlignment = "Left"  
+            <RadioButton x:Name = "Cm2" Content = "2: RGB" HorizontalAlignment = "Left"  
              Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "ColorMode" Width = "69" />
+             GroupName = "ColorMode" Width = "75" Checked = "Handle_Checked_Color" />
             
-            <RadioButton x:Name = "Cm3" Content = "3:MONO" HorizontalAlignment = "Left"  
+            <RadioButton x:Name = "Cm3" Content = "3: MONO" HorizontalAlignment = "Left"  
              Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "ColorMode" Width = "69" />
+             GroupName = "ColorMode" Width = "75" Checked = "Handle_Checked_Color" />
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-        <RadioButton x:Name = "Cm4" Content = "4:RGB/W" HorizontalAlignment = "Left"  
+        <RadioButton x:Name = "Cm4" Content = "4: RGBorW" HorizontalAlignment = "Left"  
              Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "ColorMode" Width = "69" />
+             GroupName = "ColorMode" Width = "75" Checked = "Handle_Checked_Color" />
             
-            <RadioButton x:Name = "Cm5" Content = "5:CT" HorizontalAlignment = "Left"  
+            <RadioButton x:Name = "Cm5" Content = "5: CT" HorizontalAlignment = "Left"  
              Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "ColorMode" Width = "69" />
+             GroupName = "ColorMode" Width = "75" Checked = "Handle_Checked_Color" />
             
-            <RadioButton x:Name = "Cm6" Content = "6:CTx2" HorizontalAlignment = "Left"  
+            <RadioButton x:Name = "Cm6" Content = "6: CTx2" HorizontalAlignment = "Left"  
              Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "ColorMode" Width = "69" />
+             GroupName = "ColorMode" Width = "75" Checked = "Handle_Checked_Color" />
             
-            <RadioButton x:Name = "Cm7" Content = "7:RGBWW" HorizontalAlignment = "Left"  
+            <RadioButton x:Name = "Cm7" Content = "7: RGBWW" HorizontalAlignment = "Left"  
              Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "ColorMode" Width = "75" />
+             GroupName = "ColorMode" Width = "75" Checked = "Handle_Checked_Color" />
         </StackPanel>
         <Label>Set Effect:</Label>
+        <TextBlock x:Name="EffectModeToSet" Background="Aqua"/>
         <StackPanel Orientation="Horizontal">
-            <RadioButton x:Name = "Ef0" Content = "0:OFF" HorizontalAlignment = "Left"  
+            <RadioButton x:Name = "Ef0" Content = "0: OFF" HorizontalAlignment = "Left"  
              Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "Effect" Width = "69"/>
+             GroupName = "Effect" Width = "69" Checked = "Handle_Checked_Effect" />
 
-            <RadioButton x:Name = "Ef1" Content = "1:Fade" HorizontalAlignment = "Left"  
+            <RadioButton x:Name = "Ef1" Content = "1: Fade" HorizontalAlignment = "Left"  
              Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "Effect" Width = "69" />
+             GroupName = "Effect" Width = "69" Checked = "Handle_Checked_Effect"  />
 
-            <RadioButton x:Name = "Ef2" Content = "2:RGB" HorizontalAlignment = "Left"  
+            <RadioButton x:Name = "Ef2" Content = "2: RGB" HorizontalAlignment = "Left"  
              Margin = "0,0,0,0" VerticalAlignment = "Top"  IsChecked="True"
-             GroupName = "Effect" Width = "69" />
+             GroupName = "Effect" Width = "69" Checked = "Handle_Checked_Effect"  />
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <RadioButton x:Name = "Ef3" Content = "3:Police" HorizontalAlignment = "Left"  
+            <RadioButton x:Name = "Ef3" Content = "3: Police" HorizontalAlignment = "Left"  
              Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "Effect" Width = "69" />
+             GroupName = "Effect" Width = "69" Checked = "Handle_Checked_Effect"  />
 
-            <RadioButton x:Name = "Ef4" Content = "4:Relax" HorizontalAlignment = "Left"  
+            <RadioButton x:Name = "Ef4" Content = "4: Relax" HorizontalAlignment = "Left"  
              Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "Effect" Width = "69" />
+             GroupName = "Effect" Width = "69" Checked = "Handle_Checked_Effect"  />
 
-            <RadioButton x:Name = "Ef5" Content = "5:Strobo" HorizontalAlignment = "Left"  
+            <RadioButton x:Name = "Ef5" Content = "5: Strobo" HorizontalAlignment = "Left"  
              Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "Effect" Width = "69" />
+             GroupName = "Effect" Width = "69" Checked = "Handle_Checked_Effect"  />
 
-            <RadioButton x:Name = "Ef6" Content = "6:Bell" HorizontalAlignment = "Left"  
+            <RadioButton x:Name = "Ef6" Content = "6: Bell" HorizontalAlignment = "Left"  
              Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "Effect" Width = "75" />
+             GroupName = "Effect" Width = "75" Checked = "Handle_Checked_Effect"  />
         </StackPanel>
+        
+        
+        
         <StackPanel Orientation="Horizontal">
             <Label>Color Fade:</Label>
             <TextBlock x:Name = "ColorFadeValue" Margin="100,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
         </StackPanel>
         <Slider x:Name = "ColorFadeSlider" Minimum = "25" Maximum = "36000000" TickFrequency = "1" 
-         TickPlacement = "BottomRight" Margin = "10">
+         TickPlacement = "BottomRight" Margin = "10" ValueChanged ="ColorFadeSlider_ValueChanged">
             
         </Slider>
         <StackPanel Orientation="Horizontal">
@@ -137,15 +142,16 @@
             <TextBlock x:Name = "EffectFadeValue" Margin="100,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
         </StackPanel>
         <Slider x:Name = "EffectFadeSlider" Minimum = "25" Maximum = "36000000" TickFrequency = "1" 
-         TickPlacement = "BottomRight" Margin = "10">
+         TickPlacement = "BottomRight" Margin = "10" ValueChanged ="EffectFadeSlider_ValueChanged">
 
         </Slider>
         <StackPanel Orientation="Horizontal">
             <Label>Effect Step:</Label>
             <TextBlock x:Name = "EffectStepValue" Margin="100,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
         </StackPanel>
+        
         <Slider x:Name = "EffectStepSlider" Minimum = "25" Maximum = "36000000" TickFrequency = "1" 
-         TickPlacement = "BottomRight" Margin = "10">
+         TickPlacement = "BottomRight" Margin = "10" ValueChanged ="EffectStepSlider_ValueChanged">
 
         </Slider>
 
@@ -154,7 +160,7 @@
             <TextBlock x:Name = "RedValue" Margin="100,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
         </StackPanel>
         <Slider x:Name = "RedStepSlider" Minimum = "0" Maximum = "255" TickFrequency = "1" 
-         TickPlacement = "BottomRight" Margin = "10">
+         TickPlacement = "BottomRight" Margin = "10" ValueChanged ="RedStepSlider_ValueChanged">
 
         </Slider>
 
@@ -163,7 +169,7 @@
             <TextBlock x:Name = "GreenValue" Margin="100,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
         </StackPanel>
         <Slider x:Name = "GreenStepSlider" Minimum = "0" Maximum = "255" TickFrequency = "1" 
-         TickPlacement = "BottomRight" Margin = "10">
+         TickPlacement = "BottomRight" Margin = "10" ValueChanged ="GreenStepSlider_ValueChanged">
 
         </Slider>
 
@@ -172,15 +178,15 @@
             <TextBlock x:Name = "BlueValue" Margin="100,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
         </StackPanel>
         <Slider x:Name = "BlueStepSlider" Minimum = "0" Maximum = "255" TickFrequency = "1" 
-         TickPlacement = "BottomRight" Margin = "10">
+         TickPlacement = "BottomRight" Margin = "10" ValueChanged ="BlueStepSlider_ValueChanged">
 
         </Slider>
         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
             <Label>Set Color:</Label>
-            <TextBlock x:Name="SetColor" Text="0000000000" VerticalAlignment="Center" />
+            <TextBlock x:Name="SetColor" Text="0000000000" VerticalAlignment="Center"/>
             <Button x:Name="SetColorBox" Background="#000000" Width="200" Margin="20,0,0,0"/>
         </StackPanel>
-        <Button x:Name="Update" Width="200" Content="UPDATE" Margin="20,0,0,0"/>
+        <Button x:Name="Update" Click="Update_Click" Width="200" Content="UPDATE" Margin="20,0,0,0"/>
 
 
 
