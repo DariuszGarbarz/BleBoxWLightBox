@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using WLightBoxApi.Contracts;
 using WLightBoxApi.Models;
 
 namespace WLightBoxApi.WebServices
@@ -16,7 +17,7 @@ namespace WLightBoxApi.WebServices
         /// URL or ipAdress of the device we want to interact with
         /// </summary>
         /// <param name="ipAdress">string without https:// ex: 192.168.1.11</param>
-        public GetInfo(string ipAdress) : base(ipAdress)
+        public GetInfo(string ipAdress, HttpClient httpClient) : base(ipAdress, httpClient)
         {
 
         }
@@ -25,15 +26,15 @@ namespace WLightBoxApi.WebServices
         /// Gets general information about device
         /// </summary>
         /// <returns>Complete DeviceModel</returns>
-        public DeviceModel GetInfoFromApi()
+        public DeviceResponse GetInfoFromApi()
         {
-            _httpClient = new HttpClient();
+            
             var uri = new Uri($"https://{_ipAdress}/info");
 
             HttpResponseMessage response = _httpClient.GetAsync(uri).Result;
             var getResultsJson = response.Content.ReadAsStringAsync().Result;
 
-            var deviceResult = JsonConvert.DeserializeObject<DeviceModel>(getResultsJson);
+            var deviceResult = JsonConvert.DeserializeObject<DeviceResponse>(getResultsJson);
 
             return deviceResult;
         }

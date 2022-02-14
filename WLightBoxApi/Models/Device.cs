@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WLightBoxApi.Models
+﻿namespace WLightBoxApi.Models
 {
-    /// <summary>
-    /// Model for Json input and output. Used in GET /info Api
-    /// </summary>
-    public class DeviceModel
-    {
-        public Device device { get; set; }
-    }
-
     public class Device
     {
         public string deviceName { get; set; }

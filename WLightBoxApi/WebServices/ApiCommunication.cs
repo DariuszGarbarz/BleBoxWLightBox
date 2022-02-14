@@ -11,12 +11,14 @@ namespace WLightBoxApi.WebServices
         protected string _ipAdress;
 
         /// <summary>
-        /// URL or ipAdress of the device we want to interact with
+        /// URL or ipAdress of the device we want to interact with + Previously crated httpclient for all api communication
         /// </summary>
         /// <param name="ipAdress">string without https:// ex: 192.168.1.11</param>
-        public ApiCommunication(string ipAdress)
+        /// <param name="httpClient">httpclient created from HttpClientSetup Class</param>
+        public ApiCommunication(string ipAdress, HttpClient httpClient)
         {
             _ipAdress = ipAdress;
+            _httpClient = httpClient;
         }
 
     }

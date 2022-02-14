@@ -3,26 +3,32 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using WLightBoxApi.Contracts;
 using WLightBoxApi.Models;
 
 namespace WLightBoxApi.WebServices
 {
     public class GetRgbw : ApiCommunication
     {
-        public GetRgbw(string ipAdress) : base(ipAdress)
+        public GetRgbw(string ipAdress, HttpClient httpClient) : base(ipAdress, httpClient)
         {
 
         }
 
-        public RgbwModel GetRgbwFromApi()
+        public RgbwContract GetRgbwFromApi()
         {
-            _httpClient = new HttpClient();
+            
             var uri = new Uri($"https://{_ipAdress}/api/rgbw/state");
 
             HttpResponseMessage response = _httpClient.GetAsync(uri).Result;
+            // obsługa błędów, sprawdzić response
+            if (!response.IsSuccessStatusCode)
+            {
+                //exception
+            }
             var getResultsJson = response.Content.ReadAsStringAsync().Result;
 
-            var rgbwResult = JsonConvert.DeserializeObject<RgbwModel>(getResultsJson);
+            var rgbwResult = JsonConvert.DeserializeObject<RgbwContract>(getResultsJson);
 
             return rgbwResult;
         }
