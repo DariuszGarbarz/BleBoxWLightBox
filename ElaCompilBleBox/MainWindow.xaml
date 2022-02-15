@@ -58,7 +58,7 @@
         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
             <Label>Current Color:</Label>
             <TextBlock x:Name="ActualColor" Text="ff00300000" VerticalAlignment="Center" Background="Aqua" />
-            <Button x:Name="ActualColorBox" Background="#ff0030" Width="200" Margin="20,0,0,0"/>
+            <Border x:Name="ActualColorBox" Width="150" Background="#ff0030" Margin="20,0,0,0"/>
         </StackPanel>
 
         <!-- Set State of Lightning Panel-->
@@ -157,7 +157,7 @@
         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
             <Label Width="150">Set Color:</Label>
             <TextBlock x:Name="SetColor" Text="0000000000" VerticalAlignment="Center" Width="150"/>
-            <Button x:Name="SetColorBox" Background="#000000" Width="150" Margin="20,0,0,0"/>
+            <Border x:Name="SetColorBox" Width="150" Background="#000000"/>
         </StackPanel>
         
         <!-- Update Buttons-->
@@ -165,6 +165,7 @@
             <Button x:Name="UpdateColor" Click="UpdateColor_Click" Width="150" Content="UPDATE COLOR" Margin="20,0,0,0"/>
             <Button x:Name="UpdateEffect" Click="UpdateEffect_Click" Width="150" Content="UPDATE EFFECT" Margin="20,0,0,0"/>
         </StackPanel>
+        
 
     </StackPanel>
 
