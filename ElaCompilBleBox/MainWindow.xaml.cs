@@ -128,15 +128,22 @@ namespace ElaCompilBleBox
             this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
             this.ActualEffectFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectFade);
             this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
-            this.ActualColor.Text = Convert.ToString(rgbwStatus.rgbw.currentColor);
+            this.ActualColor.Text = rgbwStatus.rgbw.currentColor;
 
             var converter = new BrushConverter();
             
-            string actualColor = Convert.ToString(rgbwStatus.rgbw.currentColor);
+            string actualColor = rgbwStatus.rgbw.currentColor.Substring(0, 6);
 
+            try
+            {
                 var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
                 this.ActualColorBox.Background = brush;
-           
+            }
+
+            catch (NotSupportedException)
+            {
+                MessageBoxResult msgbox = MessageBox.Show("Provided color format is not supported", "Error");
+            }
         }
 
         private void UpdateColor_Click(object sender, RoutedEventArgs e)
@@ -158,13 +165,22 @@ namespace ElaCompilBleBox
             this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
             this.ActualEffectFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectFade);
             this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
-            this.ActualColor.Text = Convert.ToString(rgbwStatus.rgbw.currentColor);
+            this.ActualColor.Text = rgbwStatus.rgbw.currentColor;
 
             var converter = new BrushConverter();
 
-            string actualColor = Convert.ToString(rgbwStatus.rgbw.currentColor);
-            var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
-            this.ActualColorBox.Background = brush;
+            string actualColor = rgbwStatus.rgbw.currentColor.Substring(0, 6);
+
+            try
+            {
+                var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
+                this.ActualColorBox.Background = brush;
+            }
+
+            catch (NotSupportedException)
+            {
+                MessageBoxResult msgbox = MessageBox.Show("Provided color format is not supported", "Error");
+            }
 
 
         }
@@ -189,13 +205,22 @@ namespace ElaCompilBleBox
             this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
             this.ActualEffectFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectFade);
             this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
-            this.ActualColor.Text = Convert.ToString(rgbwStatus.rgbw.currentColor);
+            this.ActualColor.Text = rgbwStatus.rgbw.currentColor;
 
             var converter = new BrushConverter();
 
-            string actualColor = Convert.ToString(rgbwStatus.rgbw.currentColor);
-            var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
-            this.ActualColorBox.Background = brush;
+            string actualColor = rgbwStatus.rgbw.currentColor.Substring(0, 6);
+
+            try
+            {
+                var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
+                this.ActualColorBox.Background = brush;
+            }
+
+            catch (NotSupportedException)
+            {
+                MessageBoxResult msgbox = MessageBox.Show("Provided color format is not supported", "Error");
+            }
 
 
         }
