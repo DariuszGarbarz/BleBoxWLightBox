@@ -15,7 +15,7 @@ namespace WLightBoxApi.WebServices
 
         }
 
-        public RgbwContract GetRgbwFromApi()
+        public RgbwResponse GetRgbwFromApi()
         {
             
             var uri = new Uri($"https://{_ipAdress}/api/rgbw/state");
@@ -28,7 +28,7 @@ namespace WLightBoxApi.WebServices
             }
             var getResultsJson = response.Content.ReadAsStringAsync().Result;
 
-            var rgbwResult = JsonConvert.DeserializeObject<RgbwContract>(getResultsJson);
+            var rgbwResult = JsonConvert.DeserializeObject<RgbwResponse>(getResultsJson);
 
             return rgbwResult;
         }

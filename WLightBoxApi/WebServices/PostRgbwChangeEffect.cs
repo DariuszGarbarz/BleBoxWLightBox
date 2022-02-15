@@ -4,19 +4,18 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using WLightBoxApi.Contracts;
-using WLightBoxApi.Models;
 
 namespace WLightBoxApi.WebServices
 {
-    public class PostRgbw : ApiCommunication
+    public class PostRgbwChangeEffect : ApiCommunication
     {
-        private RgbwContract _rgbw;
-        public PostRgbw(string ipAdress, RgbwContract rgbw, HttpClient httpClient) : base(ipAdress, httpClient)
+        private RgbwChangeEffectRequest _rgbw;
+        public PostRgbwChangeEffect(string ipAdress, RgbwChangeEffectRequest rgbw, HttpClient httpClient) : base(ipAdress, httpClient)
         {
             _rgbw = rgbw;
         }
 
-        public RgbwContract PostRgbwToApi()
+        public RgbwResponse PostRgbwChangeEffectToApi()
         {
             _httpClient = new HttpClient();
             var uri = new Uri($"https://{_ipAdress}/api/rgbw/set");
@@ -26,7 +25,7 @@ namespace WLightBoxApi.WebServices
             HttpResponseMessage response = _httpClient.PostAsync(uri, new StringContent(rgbwPost, Encoding.UTF8, "application/json")).Result;
             var getResultsJson = response.Content.ReadAsStringAsync().Result;
 
-            var rgbwResult = JsonConvert.DeserializeObject<RgbwContract>(getResultsJson);
+            var rgbwResult = JsonConvert.DeserializeObject<RgbwResponse>(getResultsJson);
 
             return rgbwResult;
 

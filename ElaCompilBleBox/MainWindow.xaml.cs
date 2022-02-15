@@ -20,11 +20,6 @@ namespace ElaCompilBleBox
 
         }
 
-        private void Handle_Checked_Color(object sender, RoutedEventArgs e)
-        {
-            RadioButton rb = sender as RadioButton;
-            this.ColorModeToSet.Text = (string)rb.Content;
-        }
 
         private void Handle_Checked_Effect(object sender, RoutedEventArgs e)
         {
@@ -126,7 +121,7 @@ namespace ElaCompilBleBox
             this.ActualDeviceAdress.Text = deviceStatus.device.ip;
 
             GetRgbw getRgbw = new GetRgbw(ipAdress, httpClient);
-            RgbwContract rgbwStatus = getRgbw.GetRgbwFromApi();
+            RgbwResponse rgbwStatus = getRgbw.GetRgbwFromApi();
 
             this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
             this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
@@ -138,30 +133,56 @@ namespace ElaCompilBleBox
             var converter = new BrushConverter();
             
             string actualColor = Convert.ToString(rgbwStatus.rgbw.currentColor);
-            var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
-            this.ActualColorBox.Background = brush;
+
+                var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
+                this.ActualColorBox.Background = brush;
+           
         }
 
-        private void Update_Click(object sender, RoutedEventArgs e)
+        private void UpdateColor_Click(object sender, RoutedEventArgs e)
         {
-            RgbwContract rgbwContract = new RgbwContract();
+            RgbwChangeColorRequest rgbwContract = new RgbwChangeColorRequest();
 
-            rgbwContract.rgbw.currentColor = "----------";
-            rgbwContract.rgbw.lastOnColor = "----------";
             rgbwContract.rgbw.desiredColor = this.SetColor.Text;
 
             rgbwContract.rgbw.durationsMs.colorFade = Convert.ToInt32(this.ColorFadeSlider.Value);
+
+            HttpClient httpClient = HttpClientSetup.CreateHttpClient();
+            string ipAdress = this.DeviceAdress.Text;
+
+            PostRgbwChangeColor postRgbw = new PostRgbwChangeColor(ipAdress, rgbwContract, httpClient);
+            RgbwResponse rgbwStatus = postRgbw.PostRgbwChangeColorToApi();
+
+            this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
+            this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
+            this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
+            this.ActualEffectFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectFade);
+            this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
+            this.ActualColor.Text = Convert.ToString(rgbwStatus.rgbw.currentColor);
+
+            var converter = new BrushConverter();
+
+            string actualColor = Convert.ToString(rgbwStatus.rgbw.currentColor);
+            var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
+            this.ActualColorBox.Background = brush;
+
+
+        }
+
+        private void UpdateEffect_Click(object sender, RoutedEventArgs e)
+        {
+            RgbwChangeEffectRequest rgbwContract = new RgbwChangeEffectRequest();
+
             rgbwContract.rgbw.durationsMs.effectFade = Convert.ToInt32(this.EffectFadeSlider.Value);
             rgbwContract.rgbw.durationsMs.effectStep = Convert.ToInt32(this.EffectStepSlider.Value);
 
-            rgbwContract.rgbw.colorMode = Int32.Parse(this.ColorModeToSet.Text.Substring(0, 1));
             rgbwContract.rgbw.effectID = Int32.Parse(this.EffectModeToSet.Text.Substring(0, 1));
 
             HttpClient httpClient = HttpClientSetup.CreateHttpClient();
             string ipAdress = this.DeviceAdress.Text;
 
-            PostRgbw postRgbw = new PostRgbw(ipAdress, rgbwContract, httpClient);
-            RgbwContract rgbwStatus = postRgbw.PostRgbwToApi();
+            PostRgbwChangeEffect postRgbw = new PostRgbwChangeEffect(ipAdress, rgbwContract, httpClient);
+            RgbwResponse rgbwStatus = postRgbw.PostRgbwChangeEffectToApi();
 
             this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
             this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
