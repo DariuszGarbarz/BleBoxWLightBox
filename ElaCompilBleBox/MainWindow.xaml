@@ -108,7 +108,7 @@
             <Label>Color Fade:</Label>
             <TextBlock x:Name = "ColorFadeValue" Margin="100,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
         </StackPanel>
-        <Slider x:Name = "ColorFadeSlider" Minimum = "25" Maximum = "36000000" TickFrequency = "1" 
+        <Slider x:Name = "ColorFadeSlider" Minimum = "25" Maximum = "3600000" TickFrequency = "1" 
          TickPlacement = "BottomRight" Margin = "10" ValueChanged ="ColorFadeSlider_ValueChanged">
         </Slider>
         
@@ -116,7 +116,7 @@
             <Label>Effect Fade:</Label>
             <TextBlock x:Name = "EffectFadeValue" Margin="100,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
         </StackPanel>
-        <Slider x:Name = "EffectFadeSlider" Minimum = "25" Maximum = "36000000" TickFrequency = "1" 
+        <Slider x:Name = "EffectFadeSlider" Minimum = "25" Maximum = "3600000" TickFrequency = "1" 
          TickPlacement = "BottomRight" Margin = "10" ValueChanged ="EffectFadeSlider_ValueChanged">
         </Slider>
         
@@ -124,7 +124,7 @@
             <Label>Effect Step:</Label>
             <TextBlock x:Name = "EffectStepValue" Margin="100,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
         </StackPanel>
-        <Slider x:Name = "EffectStepSlider" Minimum = "25" Maximum = "36000000" TickFrequency = "1" 
+        <Slider x:Name = "EffectStepSlider" Minimum = "25" Maximum = "3600000" TickFrequency = "1" 
          TickPlacement = "BottomRight" Margin = "10" ValueChanged ="EffectStepSlider_ValueChanged">
         </Slider>
         

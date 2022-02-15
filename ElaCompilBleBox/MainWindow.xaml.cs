@@ -21,102 +21,160 @@ namespace ElaCompilBleBox
 
         }
 
-
+        /// <summary>
+        /// Event Handler for all radiobuttons. It is triggered when radiobutton is checked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Handle_Checked_Effect(object sender, RoutedEventArgs e)
         {
             RadioButton rb = sender as RadioButton;
+            //Sends Content of checked radiobutton to textblock. Im using this text block for effect id picking
             this.EffectModeToSet.Text = (string)rb.Content;
         }
 
+        // handlers for durationMs sliders
+        /// <summary>
+        /// Event Handler for Color fade slider.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ColorFadeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            //logic for visual represenation of Color Fade value, posted in textblock
             int val = Convert.ToInt32(e.NewValue);
             string msg = String.Format("Current value: {0}", val);
             this.ColorFadeValue.Text = msg;
 
         }
-
+        /// <summary>
+        /// Event Handler for EffectFade slider.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EffectFadeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            //logic for visual represenation of Effect Fade value, posted in textblock
             int val = Convert.ToInt32(e.NewValue);
             string msg = String.Format("Current value: {0}", val);
             this.EffectFadeValue.Text = msg;
         }
-
+        /// <summary>
+        /// Event Handler for Effect Step slider.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EffectStepSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            //logic for visual represenation of Effect step value, posted in textblock
             int val = Convert.ToInt32(e.NewValue);
             string msg = String.Format("Current value: {0}", val);
             this.EffectStepValue.Text = msg;
         }
 
+        //handlers for RGB color setup sliders
+        /// <summary>
+        /// Event handler for Red color slider
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RedStepSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            //logic for visual represenation of Color red value, posted in textblock
             int val = Convert.ToInt32(e.NewValue);
             string msg = String.Format("Current value: {0}", val);
             this.RedValue.Text = msg;
 
+            //taking all rgb values and converts this from rgb string to hex string
             var redValue = Convert.ToInt32(this.RedStepSlider.Value);
             var greenValue = Convert.ToInt32(this.GreenStepSlider.Value);
             var blueValue = Convert.ToInt32(this.BlueStepSlider.Value);
             System.Drawing.Color myColor = System.Drawing.Color.FromArgb(redValue, greenValue, blueValue);
             string hex = myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2");
 
+            //posting complete rgb color value in hex to textblock
             SetColor.Text = $"{hex}0000";
 
+            //converting hex string to brush and changing background of corelated border for visual representation of new color
             var converter = new BrushConverter();          
             var brush = (Brush)converter.ConvertFromString($"#{hex}");
             this.SetColorBox.Background = brush;
 
         }
-
+        
+        /// <summary>
+        /// Event handler for Green color slider
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GreenStepSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            //logic for visual represenation of Color Green value, posted in textblock
             int val = Convert.ToInt32(e.NewValue);
             string msg = String.Format("Current value: {0}", val);
             this.GreenValue.Text = msg;
 
+            //taking all rgb values and converts this from rgb string to hex string
             var redValue = Convert.ToInt32(this.RedStepSlider.Value);
             var greenValue = Convert.ToInt32(this.GreenStepSlider.Value);
             var blueValue = Convert.ToInt32(this.BlueStepSlider.Value);
             System.Drawing.Color myColor = System.Drawing.Color.FromArgb(redValue, greenValue, blueValue);
             string hex = myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2");
 
+            //posting complete rgb color value in hex to textblock
             SetColor.Text = $"{hex}0000";
 
+            //converting hex string to brush and changing background of corelated border for visual representation of new color
             var converter = new BrushConverter();
             var brush = (Brush)converter.ConvertFromString($"#{hex}");
             this.SetColorBox.Background = brush;
         }
 
+        /// <summary>
+        /// Event handler for Blue color slider
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BlueStepSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            //logic for visual represenation of Color Blue value, posted in textblock
             int val = Convert.ToInt32(e.NewValue);
             string msg = String.Format("Current value: {0}", val);
             this.BlueValue.Text = msg;
 
+            //taking all rgb values and converts this from rgb string to hex string
             var redValue = Convert.ToInt32(this.RedStepSlider.Value);
             var greenValue = Convert.ToInt32(this.GreenStepSlider.Value);
             var blueValue = Convert.ToInt32(this.BlueStepSlider.Value);
             System.Drawing.Color myColor = System.Drawing.Color.FromArgb(redValue, greenValue, blueValue);
             string hex = myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2");
 
+            //posting complete rgb color value in hex to textblock
             SetColor.Text = $"{hex}0000";
 
+            //converting hex string to brush and changing background of corelated border for visual representation of new color
             var converter = new BrushConverter();
             var brush = (Brush)converter.ConvertFromString($"#{hex}");
             this.SetColorBox.Background = brush;
         }
 
-
+        //Device Api communication
+        /// <summary>
+        /// Handler for Connect Button. Trying to get device status and state of lightning and post it to mainview related controls
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
+            //Creation of new httpclient and using it in GetInfo class together with ipAdress from related textbox
             HttpClient httpClient = HttpClientSetup.CreateHttpClient();
             string ipAdress = this.DeviceAdress.Text;
             GetInfo getInfo = new GetInfo(ipAdress, httpClient);
             try
             {
+                //Connection to device status Api 
                 DeviceResponse deviceStatus = getInfo.GetInfoFromApi();
+                //Posting device status data to related textblocks
                 this.DeviceName.Text = deviceStatus.device.deviceName;
                 this.ProductName.Text = deviceStatus.device.product;
                 this.Hv.Text = deviceStatus.device.hv;
@@ -132,11 +190,13 @@ namespace ElaCompilBleBox
                 MessageBoxResult msgbox = MessageBox.Show("Cannot connect to device", "Error");
             }
 
-            
+            //New GetRgbw class that is using previously created httpclient and ip adress
             GetRgbw getRgbw = new GetRgbw(ipAdress, httpClient);
             try
             {
+                //Connection to State of Lightning Api
                 RgbwResponse rgbwStatus = getRgbw.GetRgbwFromApi();
+                //Posting State of Lightning data to related textblocks
                 this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
                 this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
                 this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
@@ -144,8 +204,8 @@ namespace ElaCompilBleBox
                 this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
                 this.ActualColor.Text = rgbwStatus.rgbw.currentColor;
 
+                //converting hex string to brush and changing background of corelated border for visual representation of current color
                 var converter = new BrushConverter();
-
                 string actualColor = rgbwStatus.rgbw.currentColor.Substring(0, 6);
 
                 try
@@ -169,8 +229,14 @@ namespace ElaCompilBleBox
             }
         }
 
+        /// <summary>
+        /// Handler for Update Color Button. Posting new color settings to device api and getting back State of Lightning to post it in mainview controls.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateColor_Click(object sender, RoutedEventArgs e)
         {
+            //need to transfer this inside class library!!!!!!!!!!!!!!!!!!!!!!!!!!!
             RgbwChangeColorRequest rgbwContract = new RgbwChangeColorRequest();
             rgbwContract.rgbw = new RgbwChangeColor();
             rgbwContract.rgbw.durationsMs = new DurationsMsChangeColor();
@@ -178,14 +244,15 @@ namespace ElaCompilBleBox
             rgbwContract.rgbw.desiredColor = this.SetColor.Text;
             rgbwContract.rgbw.durationsMs.colorFade = Convert.ToInt32(this.ColorFadeSlider.Value);
 
+            //Creation of new httpclient and using it in Post class together with ipAdress from related textbox
             HttpClient httpClient = HttpClientSetup.CreateHttpClient();
             string ipAdress = this.DeviceAdress.Text;
-
             PostRgbwChangeColor postRgbw = new PostRgbwChangeColor(ipAdress, rgbwContract, httpClient);
             try
             {
+                //Connection to State of Lightning Api
                 RgbwResponse rgbwStatus = postRgbw.PostRgbwChangeColorToApi();
-
+                //Posting State of Lightning data to related textblocks
                 this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
                 this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
                 this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
@@ -193,8 +260,8 @@ namespace ElaCompilBleBox
                 this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
                 this.ActualColor.Text = rgbwStatus.rgbw.currentColor;
 
+                //converting hex string to brush and changing background of corelated border for visual representation of current color
                 var converter = new BrushConverter();
-
                 string actualColor = rgbwStatus.rgbw.currentColor.Substring(0, 6);
 
                 try
@@ -222,6 +289,8 @@ namespace ElaCompilBleBox
 
         private void UpdateEffect_Click(object sender, RoutedEventArgs e)
         {
+
+            //need to transfer this inside class library!!!!!!!!!!!!!!!!!!!!!!!!!!!
             RgbwChangeEffectRequest rgbwContract = new RgbwChangeEffectRequest();
             rgbwContract.rgbw = new RgbwChangeEffect();
             rgbwContract.rgbw.durationsMs = new DurationsMsChangeEffect();
@@ -230,14 +299,15 @@ namespace ElaCompilBleBox
             rgbwContract.rgbw.durationsMs.effectStep = Convert.ToInt32(this.EffectStepSlider.Value);
             rgbwContract.rgbw.effectID = Int32.Parse(this.EffectModeToSet.Text.Substring(0, 1));
 
+            //Creation of new httpclient and using it in Post class together with ipAdress from related textbox
             HttpClient httpClient = HttpClientSetup.CreateHttpClient();
             string ipAdress = this.DeviceAdress.Text;
-
             PostRgbwChangeEffect postRgbw = new PostRgbwChangeEffect(ipAdress, rgbwContract, httpClient);
             try
             {
+                //Connection to State of Lightning Api
                 RgbwResponse rgbwStatus = postRgbw.PostRgbwChangeEffectToApi();
-
+                //Posting State of Lightning data to related textblocks
                 this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
                 this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
                 this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
@@ -245,8 +315,8 @@ namespace ElaCompilBleBox
                 this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
                 this.ActualColor.Text = rgbwStatus.rgbw.currentColor;
 
+                //converting hex string to brush and changing background of corelated border for visual representation of current color
                 var converter = new BrushConverter();
-
                 string actualColor = rgbwStatus.rgbw.currentColor.Substring(0, 6);
 
                 try
@@ -271,6 +341,7 @@ namespace ElaCompilBleBox
 
         }
 
+        //some values that could be usefull later  -----i should change this description later
         public string[] ColorModes = new string[] {"OFF",
             "RGBW",
             "RGB",
@@ -309,9 +380,6 @@ namespace ElaCompilBleBox
             Strobo,
             Bell
         }
-
-      
-
-        
+ 
     }
 }
