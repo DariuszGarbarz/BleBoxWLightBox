@@ -10,18 +10,29 @@ namespace WLightBoxApi.WebServices
 {
     public class PostRgbwChangeColor : ApiCommunication
     {
-        private RgbwChangeColorRequest _rgbw;
-        public PostRgbwChangeColor(string ipAdress, RgbwChangeColorRequest rgbw, HttpClient httpClient) : base(ipAdress, httpClient)
+        
+        private string _desiredColor;
+        private int _colorFade;
+
+        public PostRgbwChangeColor(string ipAdress, HttpClient httpClient, string desiredColor, int colorFade) : base(ipAdress, httpClient)
         {
-            _rgbw = rgbw;
+            _desiredColor = desiredColor;
+            _colorFade = colorFade;
         }
 
         public RgbwResponse PostRgbwChangeColorToApi()
         {
-            _httpClient = new HttpClient();
+            RgbwChangeColorRequest rgbwContract = new RgbwChangeColorRequest();
+
+            rgbwContract.rgbw = new RgbwChangeColor();
+            rgbwContract.rgbw.durationsMs = new DurationsMsChangeColor();
+
+            rgbwContract.rgbw.desiredColor = _desiredColor;
+            rgbwContract.rgbw.durationsMs.colorFade = _colorFade;
+
             var uri = new Uri($"https://{_ipAdress}/api/rgbw/set");
 
-            var rgbwPost = JsonConvert.SerializeObject(_rgbw);
+            var rgbwPost = JsonConvert.SerializeObject(rgbwContract);
 
             HttpResponseMessage response = _httpClient.PostAsync(uri, new StringContent(rgbwPost, Encoding.UTF8, "application/json")).Result;
             if (!response.IsSuccessStatusCode)

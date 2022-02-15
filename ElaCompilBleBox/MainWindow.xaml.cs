@@ -236,18 +236,10 @@ namespace ElaCompilBleBox
         /// <param name="e"></param>
         private void UpdateColor_Click(object sender, RoutedEventArgs e)
         {
-            //need to transfer this inside class library!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            RgbwChangeColorRequest rgbwContract = new RgbwChangeColorRequest();
-            rgbwContract.rgbw = new RgbwChangeColor();
-            rgbwContract.rgbw.durationsMs = new DurationsMsChangeColor();
-            
-            rgbwContract.rgbw.desiredColor = this.SetColor.Text;
-            rgbwContract.rgbw.durationsMs.colorFade = Convert.ToInt32(this.ColorFadeSlider.Value);
-
             //Creation of new httpclient and using it in Post class together with ipAdress from related textbox
             HttpClient httpClient = HttpClientSetup.CreateHttpClient();
             string ipAdress = this.DeviceAdress.Text;
-            PostRgbwChangeColor postRgbw = new PostRgbwChangeColor(ipAdress, rgbwContract, httpClient);
+            PostRgbwChangeColor postRgbw = new PostRgbwChangeColor(ipAdress, httpClient, this.SetColor.Text, Convert.ToInt32(this.ColorFadeSlider.Value));
             try
             {
                 //Connection to State of Lightning Api
@@ -290,19 +282,10 @@ namespace ElaCompilBleBox
         private void UpdateEffect_Click(object sender, RoutedEventArgs e)
         {
 
-            //need to transfer this inside class library!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            RgbwChangeEffectRequest rgbwContract = new RgbwChangeEffectRequest();
-            rgbwContract.rgbw = new RgbwChangeEffect();
-            rgbwContract.rgbw.durationsMs = new DurationsMsChangeEffect();
-
-            rgbwContract.rgbw.durationsMs.effectFade = Convert.ToInt32(this.EffectFadeSlider.Value);
-            rgbwContract.rgbw.durationsMs.effectStep = Convert.ToInt32(this.EffectStepSlider.Value);
-            rgbwContract.rgbw.effectID = Int32.Parse(this.EffectModeToSet.Text.Substring(0, 1));
-
             //Creation of new httpclient and using it in Post class together with ipAdress from related textbox
             HttpClient httpClient = HttpClientSetup.CreateHttpClient();
             string ipAdress = this.DeviceAdress.Text;
-            PostRgbwChangeEffect postRgbw = new PostRgbwChangeEffect(ipAdress, rgbwContract, httpClient);
+            PostRgbwChangeEffect postRgbw = new PostRgbwChangeEffect(ipAdress, httpClient, Convert.ToInt32(this.EffectFadeSlider.Value), Convert.ToInt32(this.EffectStepSlider.Value), Int32.Parse(this.EffectModeToSet.Text.Substring(0, 1)));
             try
             {
                 //Connection to State of Lightning Api
