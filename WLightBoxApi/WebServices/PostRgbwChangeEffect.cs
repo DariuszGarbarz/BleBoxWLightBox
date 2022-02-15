@@ -23,6 +23,10 @@ namespace WLightBoxApi.WebServices
             var rgbwPost = JsonConvert.SerializeObject(_rgbw);
 
             HttpResponseMessage response = _httpClient.PostAsync(uri, new StringContent(rgbwPost, Encoding.UTF8, "application/json")).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Communication Error");
+            }
             var getResultsJson = response.Content.ReadAsStringAsync().Result;
 
             var rgbwResult = JsonConvert.DeserializeObject<RgbwResponse>(getResultsJson);

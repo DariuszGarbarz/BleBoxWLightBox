@@ -6,6 +6,7 @@ using System.Windows.Media;
 using WLightBoxApi.Contracts;
 using WLightBoxApi.WebServices;
 using System.Drawing;
+using WLightBoxApi.Models;
 
 namespace ElaCompilBleBox
 {
@@ -107,79 +108,113 @@ namespace ElaCompilBleBox
             this.SetColorBox.Background = brush;
         }
 
+
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
             HttpClient httpClient = HttpClientSetup.CreateHttpClient();
             string ipAdress = this.DeviceAdress.Text;
             GetInfo getInfo = new GetInfo(ipAdress, httpClient);
-            DeviceResponse deviceStatus = getInfo.GetInfoFromApi();
-
-            this.DeviceName.Text = deviceStatus.device.deviceName;
-            this.ProductName.Text = deviceStatus.device.product;
-            this.Hv.Text = deviceStatus.device.hv;
-            this.Fv.Text = deviceStatus.device.fv;
-            this.ActualDeviceAdress.Text = deviceStatus.device.ip;
-
-            GetRgbw getRgbw = new GetRgbw(ipAdress, httpClient);
-            RgbwResponse rgbwStatus = getRgbw.GetRgbwFromApi();
-
-            this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
-            this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
-            this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
-            this.ActualEffectFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectFade);
-            this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
-            this.ActualColor.Text = rgbwStatus.rgbw.currentColor;
-
-            var converter = new BrushConverter();
-            
-            string actualColor = rgbwStatus.rgbw.currentColor.Substring(0, 6);
-
             try
             {
-                var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
-                this.ActualColorBox.Background = brush;
+                DeviceResponse deviceStatus = getInfo.GetInfoFromApi();
+                this.DeviceName.Text = deviceStatus.device.deviceName;
+                this.ProductName.Text = deviceStatus.device.product;
+                this.Hv.Text = deviceStatus.device.hv;
+                this.Fv.Text = deviceStatus.device.fv;
+                this.ActualDeviceAdress.Text = deviceStatus.device.ip;
+            }
+            catch(AggregateException err)
+            {
+                MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
+            }
+            catch(Exception)
+            {
+                MessageBoxResult msgbox = MessageBox.Show("Cannot connect to device", "Error");
             }
 
-            catch (NotSupportedException)
+            
+            GetRgbw getRgbw = new GetRgbw(ipAdress, httpClient);
+            try
             {
-                MessageBoxResult msgbox = MessageBox.Show("Provided color format is not supported", "Error");
+                RgbwResponse rgbwStatus = getRgbw.GetRgbwFromApi();
+                this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
+                this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
+                this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
+                this.ActualEffectFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectFade);
+                this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
+                this.ActualColor.Text = rgbwStatus.rgbw.currentColor;
+
+                var converter = new BrushConverter();
+
+                string actualColor = rgbwStatus.rgbw.currentColor.Substring(0, 6);
+
+                try
+                {
+                    var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
+                    this.ActualColorBox.Background = brush;
+                }
+
+                catch (NotSupportedException)
+                {
+                    MessageBoxResult msgbox = MessageBox.Show("Provided color format is not supported", "Error");
+                }
+            }
+            catch (AggregateException err)
+            {
+                MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
+            }
+            catch (Exception)
+            {
+                MessageBoxResult msgbox = MessageBox.Show("Cannot connect to device", "Error");
             }
         }
 
         private void UpdateColor_Click(object sender, RoutedEventArgs e)
         {
             RgbwChangeColorRequest rgbwContract = new RgbwChangeColorRequest();
-
+            rgbwContract.rgbw = new RgbwChangeColor();
+            rgbwContract.rgbw.durationsMs = new DurationsMsChangeColor();
+            
             rgbwContract.rgbw.desiredColor = this.SetColor.Text;
-
             rgbwContract.rgbw.durationsMs.colorFade = Convert.ToInt32(this.ColorFadeSlider.Value);
 
             HttpClient httpClient = HttpClientSetup.CreateHttpClient();
             string ipAdress = this.DeviceAdress.Text;
 
             PostRgbwChangeColor postRgbw = new PostRgbwChangeColor(ipAdress, rgbwContract, httpClient);
-            RgbwResponse rgbwStatus = postRgbw.PostRgbwChangeColorToApi();
-
-            this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
-            this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
-            this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
-            this.ActualEffectFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectFade);
-            this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
-            this.ActualColor.Text = rgbwStatus.rgbw.currentColor;
-
-            var converter = new BrushConverter();
-
-            string actualColor = rgbwStatus.rgbw.currentColor.Substring(0, 6);
-
             try
             {
-                var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
-                this.ActualColorBox.Background = brush;
-            }
+                RgbwResponse rgbwStatus = postRgbw.PostRgbwChangeColorToApi();
 
-            catch (NotSupportedException)
+                this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
+                this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
+                this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
+                this.ActualEffectFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectFade);
+                this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
+                this.ActualColor.Text = rgbwStatus.rgbw.currentColor;
+
+                var converter = new BrushConverter();
+
+                string actualColor = rgbwStatus.rgbw.currentColor.Substring(0, 6);
+
+                try
+                {
+                    var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
+                    this.ActualColorBox.Background = brush;
+                }
+
+                catch (NotSupportedException)
+                {
+                    MessageBoxResult msgbox = MessageBox.Show("Provided color format is not supported", "Error");
+                }
+            }
+            catch(AggregateException err)
             {
-                MessageBoxResult msgbox = MessageBox.Show("Provided color format is not supported", "Error");
+                MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
+            }
+            catch (Exception)
+            {
+                MessageBoxResult msgbox = MessageBox.Show("Cannot connect to device", "Error");
             }
 
 
@@ -188,40 +223,51 @@ namespace ElaCompilBleBox
         private void UpdateEffect_Click(object sender, RoutedEventArgs e)
         {
             RgbwChangeEffectRequest rgbwContract = new RgbwChangeEffectRequest();
+            rgbwContract.rgbw = new RgbwChangeEffect();
+            rgbwContract.rgbw.durationsMs = new DurationsMsChangeEffect();
 
             rgbwContract.rgbw.durationsMs.effectFade = Convert.ToInt32(this.EffectFadeSlider.Value);
             rgbwContract.rgbw.durationsMs.effectStep = Convert.ToInt32(this.EffectStepSlider.Value);
-
             rgbwContract.rgbw.effectID = Int32.Parse(this.EffectModeToSet.Text.Substring(0, 1));
 
             HttpClient httpClient = HttpClientSetup.CreateHttpClient();
             string ipAdress = this.DeviceAdress.Text;
 
             PostRgbwChangeEffect postRgbw = new PostRgbwChangeEffect(ipAdress, rgbwContract, httpClient);
-            RgbwResponse rgbwStatus = postRgbw.PostRgbwChangeEffectToApi();
-
-            this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
-            this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
-            this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
-            this.ActualEffectFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectFade);
-            this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
-            this.ActualColor.Text = rgbwStatus.rgbw.currentColor;
-
-            var converter = new BrushConverter();
-
-            string actualColor = rgbwStatus.rgbw.currentColor.Substring(0, 6);
-
             try
             {
-                var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
-                this.ActualColorBox.Background = brush;
-            }
+                RgbwResponse rgbwStatus = postRgbw.PostRgbwChangeEffectToApi();
 
-            catch (NotSupportedException)
+                this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
+                this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
+                this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
+                this.ActualEffectFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectFade);
+                this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
+                this.ActualColor.Text = rgbwStatus.rgbw.currentColor;
+
+                var converter = new BrushConverter();
+
+                string actualColor = rgbwStatus.rgbw.currentColor.Substring(0, 6);
+
+                try
+                {
+                    var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
+                    this.ActualColorBox.Background = brush;
+                }
+
+                catch (NotSupportedException)
+                {
+                    MessageBoxResult msgbox = MessageBox.Show("Provided color format is not supported", "Error");
+                }
+            }
+            catch (AggregateException err)
             {
-                MessageBoxResult msgbox = MessageBox.Show("Provided color format is not supported", "Error");
+                MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
             }
-
+            catch (Exception)
+            {
+                MessageBoxResult msgbox = MessageBox.Show("Cannot connect to device", "Error");
+            }
 
         }
 

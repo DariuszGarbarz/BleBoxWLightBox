@@ -30,13 +30,20 @@ namespace WLightBoxApi.WebServices
         {
             
             var uri = new Uri($"https://{_ipAdress}/info");
-
+            
             HttpResponseMessage response = _httpClient.GetAsync(uri).Result;
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Communication Error");
+            }
             var getResultsJson = response.Content.ReadAsStringAsync().Result;
 
             var deviceResult = JsonConvert.DeserializeObject<DeviceResponse>(getResultsJson);
 
             return deviceResult;
+            
+            
         }
 
     }
