@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using WLightBoxApi.Contracts;
 using WLightBoxApi.WebServices;
-using System.Drawing;
-using WLightBoxApi.Models;
 
 namespace ElaCompilBleBox
 {
@@ -164,7 +163,7 @@ namespace ElaCompilBleBox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Connect_Click(object sender, RoutedEventArgs e)
+        public async void Connect_Click(object sender, RoutedEventArgs e)
         {
             //Creation of new httpclient and using it in GetInfo class together with ipAdress from related textbox
             HttpClient httpClient = HttpClientSetup.CreateHttpClient();
@@ -173,7 +172,7 @@ namespace ElaCompilBleBox
             try
             {
                 //Connection to device status Api 
-                DeviceResponse deviceStatus = getInfo.GetInfoFromApi();
+                DeviceResponse deviceStatus = await getInfo.GetInfoFromApi();
                 //Posting device status data to related textblocks
                 this.DeviceName.Text = deviceStatus.device.deviceName;
                 this.ProductName.Text = deviceStatus.device.product;
@@ -185,7 +184,7 @@ namespace ElaCompilBleBox
             {
                 MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
             }
-            catch(Exception)
+            catch (Exception)
             {
                 MessageBoxResult msgbox = MessageBox.Show("Cannot connect to device", "Error");
             }
@@ -195,7 +194,7 @@ namespace ElaCompilBleBox
             try
             {
                 //Connection to State of Lightning Api
-                RgbwResponse rgbwStatus = getRgbw.GetRgbwFromApi();
+                RgbwResponse rgbwStatus = await getRgbw.GetRgbwFromApi();
                 //Posting State of Lightning data to related textblocks
                 this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
                 this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
