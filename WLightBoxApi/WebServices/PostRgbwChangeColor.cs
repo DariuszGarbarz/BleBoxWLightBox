@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using WLightBoxApi.Contracts;
 using WLightBoxApi.Models;
 
@@ -23,7 +24,7 @@ namespace WLightBoxApi.WebServices
             _colorFade = colorFade;
         }
 
-        public RgbwResponse PostRgbwChangeColorToApi()
+        public async Task<RgbwResponse> PostRgbwChangeColorToApi()
         {
             RgbwChangeColorRequest rgbwContract = new RgbwChangeColorRequest();
 
@@ -37,7 +38,7 @@ namespace WLightBoxApi.WebServices
 
             var rgbwPost = JsonConvert.SerializeObject(rgbwContract);
 
-            HttpResponseMessage response = _httpClient.PostAsync(uri, new StringContent(rgbwPost, Encoding.UTF8, "application/json")).Result;
+            HttpResponseMessage response = await _httpClient.PostAsync(uri, new StringContent(rgbwPost, Encoding.UTF8, "application/json"));
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Communication Error");
