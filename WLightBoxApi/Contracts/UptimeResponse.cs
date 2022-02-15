@@ -5,7 +5,7 @@ using System.Text;
 namespace WLightBoxApi.Contracts
 {
     /// <summary>
-    /// Model for Json input and output. Used in GET /api/device/uptime Api
+    /// Model for Json Contract. Used in GET /api/device/uptime Api
     /// </summary>
     public class UptimeResponse
     {

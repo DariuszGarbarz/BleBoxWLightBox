@@ -5,6 +5,9 @@ using WLightBoxApi.Contracts;
 
 namespace WLightBoxApi.WebServices
 {
+    /// <summary>
+    /// Class thats connects to device /api/rgbw/state and gets all State of Lightning data
+    /// </summary>
     public class GetRgbw : ApiCommunication
     {
         public GetRgbw(string ipAdress, HttpClient httpClient) : base(ipAdress, httpClient)
@@ -18,7 +21,6 @@ namespace WLightBoxApi.WebServices
             var uri = new Uri($"https://{_ipAdress}/api/rgbw/state");
 
             HttpResponseMessage response = _httpClient.GetAsync(uri).Result;
-            // obsługa błędów, sprawdzić response
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Communication Error");

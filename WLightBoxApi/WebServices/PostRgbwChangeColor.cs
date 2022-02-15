@@ -8,6 +8,9 @@ using WLightBoxApi.Models;
 
 namespace WLightBoxApi.WebServices
 {
+    /// <summary>
+    /// Class that connects to device /api/rgbw/set Api, posting new color settings to device and getting State of Lightning data
+    /// </summary>
     public class PostRgbwChangeColor : ApiCommunication
     {
         

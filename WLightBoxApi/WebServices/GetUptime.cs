@@ -8,6 +8,9 @@ using WLightBoxApi.Models;
 
 namespace WLightBoxApi.WebServices
 {
+    /// <summary>
+    /// Class that connects to device /api/device/uptime Api and gets uptime status data
+    /// </summary>
     public class GetUptime : ApiCommunication
     {
         public GetUptime(string ipAdress, HttpClient httpClient) : base(ipAdress, httpClient)

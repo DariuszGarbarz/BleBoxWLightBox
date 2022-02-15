@@ -6,7 +6,7 @@ using WLightBoxApi.Models;
 namespace WLightBoxApi.Contracts
 {
     /// <summary>
-    /// Model for Json input and output. Used in GET /api/rgbw/state Api and POST /api/rgbw/set Api
+    /// Model for Json Contract. Used in GET /api/rgbw/state Api
     /// </summary>
     public class RgbwResponse
     {

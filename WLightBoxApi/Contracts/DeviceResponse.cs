@@ -6,7 +6,7 @@ using WLightBoxApi.Models;
 namespace WLightBoxApi.Contracts
 {
     /// <summary>
-    /// Model for Json input and output. Used in GET /info Api
+    /// Model for Json Contract. Used in GET /info Api
     /// </summary>
     public class DeviceResponse
     {

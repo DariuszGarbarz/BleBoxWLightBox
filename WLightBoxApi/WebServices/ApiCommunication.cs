@@ -5,6 +5,9 @@ using System.Text;
 
 namespace WLightBoxApi.WebServices
 {
+    /// <summary>
+    /// Base class for api communication classes
+    /// </summary>
     public abstract class ApiCommunication
     {
         protected HttpClient _httpClient;

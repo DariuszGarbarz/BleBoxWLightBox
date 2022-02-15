@@ -8,6 +8,9 @@ using WLightBoxApi.Models;
 
 namespace WLightBoxApi.WebServices
 {
+    /// <summary>
+    /// Class that connects to device /api/rgbw/set Api, posting new effects settings to device and getting State of Lightning data
+    /// </summary>
     public class PostRgbwChangeEffect : ApiCommunication
     {
         private int _effectFade;
