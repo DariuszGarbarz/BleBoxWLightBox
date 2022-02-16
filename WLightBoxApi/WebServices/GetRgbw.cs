@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using WLightBoxApi.Contracts;
 
 namespace WLightBoxApi.WebServices
@@ -15,12 +16,12 @@ namespace WLightBoxApi.WebServices
 
         }
 
-        public RgbwResponse GetRgbwFromApi()
+        public async Task<RgbwResponse> GetRgbwFromApi()
         {
             
             var uri = new Uri($"https://{_ipAdress}/api/rgbw/state");
 
-            HttpResponseMessage response = _httpClient.GetAsync(uri).Result;
+            HttpResponseMessage response = await _httpClient.GetAsync(uri);
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Communication Error");

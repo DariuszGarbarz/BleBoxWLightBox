@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using WLightBoxApi.Contracts;
 using WLightBoxApi.Models;
 
@@ -26,12 +27,12 @@ namespace WLightBoxApi.WebServices
         /// Gets general information about device
         /// </summary>
         /// <returns>Complete DeviceModel</returns>
-        public DeviceResponse GetInfoFromApi()
+        public async Task<DeviceResponse> GetInfoFromApi()
         {
             
             var uri = new Uri($"https://{_ipAdress}/info");
             
-            HttpResponseMessage response = _httpClient.GetAsync(uri).Result;
+            HttpResponseMessage response = await _httpClient.GetAsync(uri);
 
             if (!response.IsSuccessStatusCode)
             {
