@@ -1,10 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using WLightBoxApi.Contracts;
-using WLightBoxApi.Models;
 
 namespace WLightBoxApi.WebServices
 {
