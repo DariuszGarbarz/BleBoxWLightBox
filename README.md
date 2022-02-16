@@ -3,27 +3,27 @@
 Reusable Class library that provides api communication with BleBox devices with API type: wLightBox. 
 It can gather device status, it's state of lightning and uptime. On the other hand it can change device properties like color, effect and timings related to color and effect.
 
-CreateHttpClient()
+### CreateHttpClient()
 Method used for httpclient creation. Can be extended in the future for authentication ect.
 Returns ready to use httpclient for other methods.
 
-GetUptimeFromApi()
+### GetUptimeFromApi()
 Gets uptime status of the device in seconds. Needs Device adress in string e.g. 192.168.1.11 and httpclient. Both need to be injected on it's class instance creation via constructor. 
 Returns UptimeResponse.
 
-GetInfoFromApi()
+### GetInfoFromApi()
 Gets device status. Needs Device adress in string e.g. 192.168.1.11 and httpclient. Both need to be injected on it's class instance creation via constructor. 
 Returns DeviceResponse.
 
-GetRgbwFromApi()
+### GetRgbwFromApi()
 Gets device State of Lightning. Needs Device adress in string e.g. 192.168.1.11 and httpclient. Both need to be injected on it's class instance creation via constructor. 
 Returns RgbwResponse.
 
-PostRgbwChangeColorToApi()
+### PostRgbwChangeColorToApi()
 Post new color and colorFade settings to device. Needs Device adress in string e.g. 192.168.1.11, httpclient, desired color in 10-digit hex value e.g."ff00000000", color fade timing between 25 and 3600000 in integer  . All need to be injected on it's class instance creation via constructor. 
 Returns RgbwResponse.
 
-PostRgbwChangeEffectToApi()
+### PostRgbwChangeEffectToApi()
 Post new effect, effectFade and effectStep settings to device. Needs Device adress in string e.g. 192.168.1.11, httpclient, effectId from 0 to 6 in integer, effect fade timing between 25 and 3600000 in integer, effect step timing between 25 and 3600000 in integer. All need to be injected on it's class instance creation via constructor. 
 Returns RgbwResponse.
 
