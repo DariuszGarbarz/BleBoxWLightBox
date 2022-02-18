@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ElaCompilBleBox"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="wLightBox App" Height="860" Width="450">
+        Title="wLightBox App" Height="910" Width="450">
     <StackPanel Background="#f6f6f6">
         <!-- wLightBox Status-->
         <StackPanel Background="#1e293c" VerticalAlignment="Top">
@@ -80,7 +80,7 @@
 
             <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0">
                 <Label HorizontalAlignment="Center">Color Mode:</Label>
-                <TextBlock x:Name="ActualColorMode" Text="RGBW" VerticalAlignment="Center" Background="#5697d3" Margin="10,0,10,0"/>
+                <TextBlock x:Name="ActualColorMode" Text="RGBWW" VerticalAlignment="Center" Background="#5697d3" Margin="10,0,10,0"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1">
                 <Label HorizontalAlignment="Center">Effect:</Label>
@@ -179,6 +179,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <!-- Duration Sliders-->
@@ -232,8 +233,28 @@
                 TickPlacement = "BottomRight" Margin = "10" ValueChanged ="BlueStepSlider_ValueChanged">
                 </Slider>
             </StackPanel>
+
+            <!-- WW/CW Sliders-->
+
+            <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="0">
+                <Label>Set WW:</Label>
+                <TextBlock x:Name = "WWValue" Margin="0,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
+
+                <Slider x:Name = "WWSlider" Minimum = "0" Maximum = "255" TickFrequency = "1" 
+                TickPlacement = "BottomRight" Margin = "10" ValueChanged ="WWSlider_ValueChanged">
+                </Slider>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1">
+                <Label>Set CW:</Label>
+                <TextBlock x:Name = "CWValue" Margin="0,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
+
+                <Slider x:Name = "CWSlider" Minimum = "0" Maximum = "255" TickFrequency = "1" 
+                TickPlacement = "BottomRight" Margin = "10" ValueChanged ="CWSlider_ValueChanged">
+                </Slider>
+            </StackPanel>
+            
             <!-- Panel with live color change-->
-            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Vertical" Margin="0,0,0,10" HorizontalAlignment="Center">
+            <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Vertical" Margin="0,0,0,10" HorizontalAlignment="Center">
                 <Label Width="150">Set Color:</Label>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock x:Name="SetColor" Text="0000000000" VerticalAlignment="Center" Background="#5697d3" Margin="10,0,10,0"/>
@@ -243,9 +264,9 @@
 
             <!-- Update Buttons-->
 
-            <Button Grid.Row="4" Grid.Column="1" x:Name="UpdateColor" Click="UpdateColor_Click" Width="150" Content="Change Color" Margin="0,0,0,0"
+            <Button Grid.Row="5" Grid.Column="1" x:Name="UpdateColor" Click="UpdateColor_Click" Width="150" Content="Change Color" Margin="0,0,0,0"
                     Background="#5697d3" Foreground="White" BorderThickness="2" BorderBrush="#1e293c"/>
-            <Button Grid.Row="4" Grid.Column="0" x:Name="UpdateEffect" Click="UpdateEffect_Click" Width="150" Content="Change Effect" Margin="0,0,0,0"
+            <Button Grid.Row="5" Grid.Column="0" x:Name="UpdateEffect" Click="UpdateEffect_Click" Width="150" Content="Change Effect" Margin="0,0,0,0"
                     Background="#5697d3" Foreground="White" BorderThickness="2" BorderBrush="#1e293c"/>
 
 

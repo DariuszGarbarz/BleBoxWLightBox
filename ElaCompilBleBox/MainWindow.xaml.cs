@@ -90,8 +90,12 @@ namespace ElaCompilBleBox
             System.Drawing.Color myColor = System.Drawing.Color.FromArgb(redValue, greenValue, blueValue);
             string hex = myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2");
 
+            var wwValue = Convert.ToInt32(this.WWSlider.Value);
+            var cwValue = Convert.ToInt32(this.CWSlider.Value);
+            string light = wwValue.ToString("X2") + cwValue.ToString("X2");
+
             //posting complete rgb color value in hex to textblock
-            SetColor.Text = $"{hex}0000";
+            SetColor.Text = $"{hex}{light}";
 
             //converting hex string to brush and changing background of corelated border for visual representation of new color
             var converter = new BrushConverter();          
@@ -119,8 +123,12 @@ namespace ElaCompilBleBox
             System.Drawing.Color myColor = System.Drawing.Color.FromArgb(redValue, greenValue, blueValue);
             string hex = myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2");
 
+            var wwValue = Convert.ToInt32(this.WWSlider.Value);
+            var cwValue = Convert.ToInt32(this.CWSlider.Value);
+            string light = wwValue.ToString("X2") + cwValue.ToString("X2");
+
             //posting complete rgb color value in hex to textblock
-            SetColor.Text = $"{hex}0000";
+            SetColor.Text = $"{hex}{light}";
 
             //converting hex string to brush and changing background of corelated border for visual representation of new color
             var converter = new BrushConverter();
@@ -147,14 +155,74 @@ namespace ElaCompilBleBox
             System.Drawing.Color myColor = System.Drawing.Color.FromArgb(redValue, greenValue, blueValue);
             string hex = myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2");
 
+            var wwValue = Convert.ToInt32(this.WWSlider.Value);
+            var cwValue = Convert.ToInt32(this.CWSlider.Value);
+            string light = wwValue.ToString("X2") + cwValue.ToString("X2");
+
             //posting complete rgb color value in hex to textblock
-            SetColor.Text = $"{hex}0000";
+            SetColor.Text = $"{hex}{light}";
 
             //converting hex string to brush and changing background of corelated border for visual representation of new color
             var converter = new BrushConverter();
             var brush = (Brush)converter.ConvertFromString($"#{hex}");
             this.SetColorBox.Background = brush;
         }
+
+        private void WWSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            //logic for visual represenation of WW value, posted in textblock
+            int val = Convert.ToInt32(e.NewValue);
+            string msg = String.Format("Current value: {0}", val);
+            this.WWValue.Text = msg;
+
+            //taking all rgb values and converts this from rgb string to hex string
+            var redValue = Convert.ToInt32(this.RedStepSlider.Value);
+            var greenValue = Convert.ToInt32(this.GreenStepSlider.Value);
+            var blueValue = Convert.ToInt32(this.BlueStepSlider.Value);
+            System.Drawing.Color myColor = System.Drawing.Color.FromArgb(redValue, greenValue, blueValue);
+            string hex = myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2");
+
+            var wwValue = Convert.ToInt32(this.WWSlider.Value);
+            var cwValue = Convert.ToInt32(this.CWSlider.Value);
+            string light = wwValue.ToString("X2") + cwValue.ToString("X2");
+
+            //posting complete rgb color value in hex to textblock
+            SetColor.Text = $"{hex}{light}";
+
+            //converting hex string to brush and changing background of corelated border for visual representation of new color
+            var converter = new BrushConverter();
+            var brush = (Brush)converter.ConvertFromString($"#{hex}");
+            this.SetColorBox.Background = brush;
+        }
+
+        private void CWSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            //logic for visual represenation of CW value, posted in textblock
+            int val = Convert.ToInt32(e.NewValue);
+            string msg = String.Format("Current value: {0}", val);
+            this.CWValue.Text = msg;
+
+            //taking all rgb values and converts this from rgb string to hex string
+            var redValue = Convert.ToInt32(this.RedStepSlider.Value);
+            var greenValue = Convert.ToInt32(this.GreenStepSlider.Value);
+            var blueValue = Convert.ToInt32(this.BlueStepSlider.Value);
+            System.Drawing.Color myColor = System.Drawing.Color.FromArgb(redValue, greenValue, blueValue);
+            string hex = myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2");
+
+            var wwValue = Convert.ToInt32(this.WWSlider.Value);
+            var cwValue = Convert.ToInt32(this.CWSlider.Value);
+            string light = wwValue.ToString("X2") + cwValue.ToString("X2");
+
+            //posting complete rgb color value in hex to textblock
+            SetColor.Text = $"{hex}{light}";
+
+            //converting hex string to brush and changing background of corelated border for visual representation of new color
+            var converter = new BrushConverter();
+            var brush = (Brush)converter.ConvertFromString($"#{hex}");
+            this.SetColorBox.Background = brush;
+        }
+
+
 
         //Device Api communication
         /// <summary>
