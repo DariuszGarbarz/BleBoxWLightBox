@@ -6,166 +6,251 @@
         xmlns:local="clr-namespace:ElaCompilBleBox"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="wLightBox App" Height="910" Width="450">
-    <StackPanel>
+        Title="wLightBox App" Height="860" Width="450">
+    <StackPanel Background="#f6f6f6">
         <!-- wLightBox Status-->
-        <StackPanel Background="#556190" VerticalAlignment="Top">
-        <Label HorizontalAlignment="Center" FontWeight="Bold" Foreground="#229ad7">
+        <StackPanel Background="#1e293c" VerticalAlignment="Top">
+        <Label HorizontalAlignment="Center" FontWeight="Bold" Foreground="White">
             wLightBox Status
         </Label>
         </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label>Enter device adress:</Label>
-            <TextBox x:Name="DeviceAdress" Text="192.168.1.11" VerticalAlignment="Center" />
-            <Button x:Name="Connect" Click="Connect_Click" Content="Connect" Margin="20,0,0,0"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label>Device Name:</Label>
-            <TextBlock x:Name="DeviceName" Text="My BleBox device name" VerticalAlignment="Center" Background="Aqua" />
-            <Label>Product:</Label>
-            <TextBlock x:Name="ProductName" Text="wLightBox_v3" VerticalAlignment="Center" Background="Aqua"/>
+        <StackPanel Orientation="Vertical">
+            <Label HorizontalAlignment="Center">Enter device adress:</Label>
+            <TextBox x:Name="DeviceAdress" Text="192.168.1.11" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button x:Name="Connect" Click="Connect_Click" Content="Check Device Status" Width="150"
+                    Margin="2,10,2,10" Background="#5697d3" Foreground="White" BorderThickness="2" BorderBrush="#1e293c"/>
         </StackPanel>
         
-        <StackPanel Orientation="Horizontal">
-            <Label>hv:</Label>
-            <TextBlock x:Name="Hv" Text="9.1d" VerticalAlignment="Center" Background="Aqua"/>
-            <Label>fv:</Label>
-            <TextBlock x:Name="Fv" Text="0.987" VerticalAlignment="Center" Background="Aqua" />
-            <Label>Device Adress:</Label>
-            <TextBlock x:Name="ActualDeviceAdress" Text="192.168.1.11" VerticalAlignment="Center" Background="Aqua" />
-        </StackPanel>
+        <Grid Background="White" Margin="0,0,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            
+            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+            <Label HorizontalAlignment="Center">Device Name:</Label>
+                <TextBlock x:Name="DeviceName" Text="My BleBox device name" VerticalAlignment="Center" Background="#5697d3" Margin="10,0,10,0" />
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2">
+                <Label HorizontalAlignment="Center">Product:</Label>
+                <TextBlock x:Name="ProductName" Text="wLightBox_v3" VerticalAlignment="Center" Background="#5697d3" Margin="10,0,10,0" />
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+                <Label HorizontalAlignment="Center">hv:</Label>
+                <TextBlock x:Name="Hv" Text="9.1d" VerticalAlignment="Center" Background="#5697d3" Margin="10,0,10,0" />
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                <Label HorizontalAlignment="Center">fv:</Label>
+                <TextBlock x:Name="Fv" Text="0.987" VerticalAlignment="Center" Background="#5697d3" Margin="10,0,10,0" />
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2">
+                <Label HorizontalAlignment="Center">Device Adress:</Label>
+                <TextBlock x:Name="ActualDeviceAdress" Text="192.168.1.11" VerticalAlignment="Center" Background="#5697d3" Margin="10,0,10,0"/>
+            </StackPanel>
+        </Grid>
 
         <!-- State of Lightning Panel-->
-        <StackPanel Background="#556190">
-            <Label HorizontalAlignment="Center" FontWeight="Bold" Foreground="#229ad7">
+
+        
+            <StackPanel Background="#1e293c">
+            <Label HorizontalAlignment="Center" FontWeight="Bold" Foreground="White">
                 State of Lightning
             </Label>
         </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label>Color Mode:</Label>
-            <TextBlock x:Name="ActualColorMode" Text="RGBW" VerticalAlignment="Center" Background="Aqua" />
-            <Label>Effect:</Label>
-            <TextBlock x:Name="ActualEffectId" Text="RGB" VerticalAlignment="Center" Background="Aqua"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label>Color Fade:</Label>
-            <TextBlock x:Name="ActualColorFade" Text="1000" VerticalAlignment="Center" Background="Aqua" />
-            <Label>Effect Fade:</Label>
-            <TextBlock x:Name="ActualEffectFade" Text="1500" VerticalAlignment="Center" Background="Aqua"/>
-            <Label>Effect Step:</Label>
-            <TextBlock x:Name="ActualEffectStep" Text="2000" VerticalAlignment="Center" Background="Aqua"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-            <Label>Current Color:</Label>
-            <TextBlock x:Name="ActualColor" Text="ff00300000" VerticalAlignment="Center" Background="Aqua" />
-            <Border x:Name="ActualColorBox" Width="150" Background="#ff0030" Margin="20,0,0,0"/>
-        </StackPanel>
+        <Grid Background="White" Margin="0,0,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+                <Label HorizontalAlignment="Center">Color Mode:</Label>
+                <TextBlock x:Name="ActualColorMode" Text="RGBW" VerticalAlignment="Center" Background="#5697d3" Margin="10,0,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+                <Label HorizontalAlignment="Center">Effect:</Label>
+                <TextBlock x:Name="ActualEffectId" Text="RGB" VerticalAlignment="Center" Background="#5697d3" Margin="10,0,10,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+                <Label HorizontalAlignment="Center">Color Fade:</Label>
+                <TextBlock x:Name="ActualColorFade" Text="1000" VerticalAlignment="Center" Background="#5697d3" Margin="10,0,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                <Label HorizontalAlignment="Center">Effect Fade:</Label>
+                <TextBlock x:Name="ActualEffectFade" Text="1500" VerticalAlignment="Center" Background="#5697d3" Margin="10,0,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2">
+                <Label HorizontalAlignment="Center">Effect Step:</Label>
+                <TextBlock x:Name="ActualEffectStep" Text="2000" VerticalAlignment="Center" Background="#5697d3" Margin="10,0,10,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="2">
+                <Label HorizontalAlignment="Center">Current Color:</Label>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="ActualColor" Text="ff00300000" VerticalAlignment="Center" Background="#5697d3" Margin="10,0,10,0"/>
+                <Border x:Name="ActualColorBox" Width="60" Background="#ff0030" Margin="0,0,10,0" BorderThickness="3"  BorderBrush="#1e293c"/>
+                </StackPanel>
+            </StackPanel>
+
+        </Grid>
 
         <!-- Set State of Lightning Panel-->
-        <StackPanel Background="#556190">
-            <Label HorizontalAlignment="Center" FontWeight="Bold" Foreground="#229ad7">
+        <StackPanel Background="#1e293c">
+            <Label HorizontalAlignment="Center" FontWeight="Bold" Foreground="white">
                 Set State of Lightning
             </Label>
         </StackPanel>
 
         <!-- Set Effect RadioButtons-->
-        <Label>Set Effect:</Label>
-        <TextBlock x:Name="EffectModeToSet" Background="Aqua"/>
-        <StackPanel Orientation="Horizontal">
-            <RadioButton x:Name = "Ef0" Content = "0: OFF" HorizontalAlignment = "Left"  
-             Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "Effect" Width = "69" Checked = "Handle_Checked_Effect" />
 
-            <RadioButton x:Name = "Ef1" Content = "1: Fade" HorizontalAlignment = "Left"  
-             Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "Effect" Width = "69" Checked = "Handle_Checked_Effect"  />
+        <Grid Background="White" Margin="0,0,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <RadioButton x:Name = "Ef2" Content = "2: RGB" HorizontalAlignment = "Left"  
-             Margin = "0,0,0,0" VerticalAlignment = "Top"  IsChecked="True"
-             GroupName = "Effect" Width = "69" Checked = "Handle_Checked_Effect"  />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <RadioButton x:Name = "Ef3" Content = "3: Police" HorizontalAlignment = "Left"  
-             Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "Effect" Width = "69" Checked = "Handle_Checked_Effect"  />
+            <Label Grid.Row="0" Grid.Column="0">Set Effect:</Label>
+            
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="EffectModeToSet" Background="#5697d3" Grid.Row="0" Grid.Column="1"/>
 
-            <RadioButton x:Name = "Ef4" Content = "4: Relax" HorizontalAlignment = "Left"  
-             Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "Effect" Width = "69" Checked = "Handle_Checked_Effect"  />
+            <RadioButton Grid.Row="0" Grid.Column="2" x:Name = "Ef0" Content = "0: OFF" HorizontalAlignment = "Left"  
+             Margin = "0,0,0,0" VerticalAlignment = "Center"  
+             GroupName = "Effect"  Checked = "Handle_Checked_Effect" />
 
-            <RadioButton x:Name = "Ef5" Content = "5: Strobo" HorizontalAlignment = "Left"  
-             Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "Effect" Width = "69" Checked = "Handle_Checked_Effect"  />
+            <RadioButton Grid.Row="1" Grid.Column="0" x:Name = "Ef1" Content = "1: Fade" HorizontalAlignment = "Left"  
+             Margin = "0,10,0,10" VerticalAlignment = "Top"  
+             GroupName = "Effect"  Checked = "Handle_Checked_Effect"  />
 
-            <RadioButton x:Name = "Ef6" Content = "6: Bell" HorizontalAlignment = "Left"  
-             Margin = "0,0,0,0" VerticalAlignment = "Top"  
-             GroupName = "Effect" Width = "75" Checked = "Handle_Checked_Effect"  />
-        </StackPanel>
+            <RadioButton Grid.Row="1" Grid.Column="1" x:Name = "Ef2" Content = "2: RGB" HorizontalAlignment = "Left"  
+             Margin = "0,10,0,10" VerticalAlignment = "Top"  IsChecked="True"
+             GroupName = "Effect"  Checked = "Handle_Checked_Effect"  />
+
+            <RadioButton Grid.Row="1" Grid.Column="2" x:Name = "Ef3" Content = "3: Police" HorizontalAlignment = "Left"  
+             Margin = "0,10,0,10" VerticalAlignment = "Top"  
+             GroupName = "Effect"  Checked = "Handle_Checked_Effect"  />
+
+            <RadioButton Grid.Row="2" Grid.Column="0" x:Name = "Ef4" Content = "4: Relax" HorizontalAlignment = "Left"  
+             Margin = "0,10,0,10" VerticalAlignment = "Top"  
+             GroupName = "Effect"  Checked = "Handle_Checked_Effect"  />
+
+            <RadioButton Grid.Row="2" Grid.Column="1" x:Name = "Ef5" Content = "5: Strobo" HorizontalAlignment = "Left"  
+             Margin = "0,10,0,10" VerticalAlignment = "Top"  
+             GroupName = "Effect"  Checked = "Handle_Checked_Effect"  />
+
+            <RadioButton Grid.Row="2" Grid.Column="2" x:Name = "Ef6" Content = "6: Bell" HorizontalAlignment = "Left"  
+             Margin = "0,10,0,10" VerticalAlignment = "Top"  
+             GroupName = "Effect"  Checked = "Handle_Checked_Effect"  />
+        
+        </Grid>
 
 
-        <!-- Duration Sliders-->
-        <StackPanel Orientation="Horizontal">
-            <Label>Color Fade:</Label>
-            <TextBlock x:Name = "ColorFadeValue" Margin="100,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
-        </StackPanel>
-        <Slider x:Name = "ColorFadeSlider" Minimum = "25" Maximum = "3600000" TickFrequency = "1" 
-         TickPlacement = "BottomRight" Margin = "10" ValueChanged ="ColorFadeSlider_ValueChanged">
-        </Slider>
-        
-        <StackPanel Orientation="Horizontal">
-            <Label>Effect Fade:</Label>
-            <TextBlock x:Name = "EffectFadeValue" Margin="100,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
-        </StackPanel>
-        <Slider x:Name = "EffectFadeSlider" Minimum = "25" Maximum = "3600000" TickFrequency = "1" 
-         TickPlacement = "BottomRight" Margin = "10" ValueChanged ="EffectFadeSlider_ValueChanged">
-        </Slider>
-        
-        <StackPanel Orientation="Horizontal">
-            <Label>Effect Step:</Label>
-            <TextBlock x:Name = "EffectStepValue" Margin="100,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
-        </StackPanel>
-        <Slider x:Name = "EffectStepSlider" Minimum = "25" Maximum = "3600000" TickFrequency = "1" 
-         TickPlacement = "BottomRight" Margin = "10" ValueChanged ="EffectStepSlider_ValueChanged">
-        </Slider>
-        
-        <!-- RGB SLIDERS-->
-        <StackPanel Orientation="Horizontal">
-            <Label>Set Red:</Label>
-            <TextBlock x:Name = "RedValue" Margin="100,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
-        </StackPanel>
-        <Slider x:Name = "RedStepSlider" Minimum = "0" Maximum = "255" TickFrequency = "1" 
-         TickPlacement = "BottomRight" Margin = "10" ValueChanged ="RedStepSlider_ValueChanged">
-        </Slider>
-        
-        <StackPanel Orientation="Horizontal">
-            <Label>Set Green:</Label>
-            <TextBlock x:Name = "GreenValue" Margin="100,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
-        </StackPanel>
-        <Slider x:Name = "GreenStepSlider" Minimum = "0" Maximum = "255" TickFrequency = "1" 
-         TickPlacement = "BottomRight" Margin = "10" ValueChanged ="GreenStepSlider_ValueChanged">
-        </Slider>
-        
-        <StackPanel Orientation="Horizontal">
-            <Label>Set Blue:</Label>
-            <TextBlock x:Name = "BlueValue" Margin="100,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
-        </StackPanel>
-        <Slider x:Name = "BlueStepSlider" Minimum = "0" Maximum = "255" TickFrequency = "1" 
-         TickPlacement = "BottomRight" Margin = "10" ValueChanged ="BlueStepSlider_ValueChanged">
-        </Slider>
-        
-        <!-- Panel with live color change-->
-        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-            <Label Width="150">Set Color:</Label>
-            <TextBlock x:Name="SetColor" Text="0000000000" VerticalAlignment="Center" Width="150"/>
-            <Border x:Name="SetColorBox" Width="150" Background="#000000"/>
-        </StackPanel>
-        
-        <!-- Update Buttons-->
-        <StackPanel Orientation="Horizontal">
-            <Button x:Name="UpdateColor" Click="UpdateColor_Click" Width="150" Content="UPDATE COLOR" Margin="20,0,0,0"/>
-            <Button x:Name="UpdateEffect" Click="UpdateEffect_Click" Width="150" Content="UPDATE EFFECT" Margin="20,0,0,0"/>
-        </StackPanel>
-        
+
+        <Grid Background="White" Margin="0,0,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Duration Sliders-->
+            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+                <Label>Set Color Fade:</Label>
+                <TextBlock x:Name = "ColorFadeValue" Margin="0,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
+
+                <Slider x:Name = "ColorFadeSlider" Minimum = "25" Maximum = "3600000" TickFrequency = "1" 
+                TickPlacement = "BottomRight" Margin = "10" ValueChanged ="ColorFadeSlider_ValueChanged">
+                </Slider>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+                <Label>Set Effect Fade:</Label>
+                <TextBlock x:Name = "EffectFadeValue" Margin="0,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
+
+                <Slider x:Name = "EffectFadeSlider" Minimum = "25" Maximum = "3600000" TickFrequency = "1" 
+                TickPlacement = "BottomRight" Margin = "10" ValueChanged ="EffectFadeSlider_ValueChanged">
+                </Slider>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0">
+                <Label>Set Effect Step:</Label>
+                <TextBlock x:Name = "EffectStepValue" Margin="0,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
+
+                <Slider x:Name = "EffectStepSlider" Minimum = "25" Maximum = "3600000" TickFrequency = "1" 
+                TickPlacement = "BottomRight" Margin = "10" ValueChanged ="EffectStepSlider_ValueChanged">
+                </Slider>
+            </StackPanel>
+            <!-- RGB SLIDERS-->
+            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+                <Label>Set Red:</Label>
+                <TextBlock x:Name = "RedValue" Margin="0,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
+
+                <Slider x:Name = "RedStepSlider" Minimum = "0" Maximum = "255" TickFrequency = "1" 
+                TickPlacement = "BottomRight" Margin = "10" ValueChanged ="RedStepSlider_ValueChanged">
+                </Slider>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                <Label>Set Green:</Label>
+                <TextBlock x:Name = "GreenValue" Margin="0,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
+
+                <Slider x:Name = "GreenStepSlider" Minimum = "0" Maximum = "255" TickFrequency = "1" 
+                TickPlacement = "BottomRight" Margin = "10" ValueChanged ="GreenStepSlider_ValueChanged">
+                </Slider>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1">
+                <Label>Set Blue:</Label>
+                <TextBlock x:Name = "BlueValue" Margin="0,0,0,0" Text = "Current value: 0" VerticalAlignment="Center" />
+
+                <Slider x:Name = "BlueStepSlider" Minimum = "0" Maximum = "255" TickFrequency = "1" 
+                TickPlacement = "BottomRight" Margin = "10" ValueChanged ="BlueStepSlider_ValueChanged">
+                </Slider>
+            </StackPanel>
+            <!-- Panel with live color change-->
+            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Vertical" Margin="0,0,0,10" HorizontalAlignment="Center">
+                <Label Width="150">Set Color:</Label>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="SetColor" Text="0000000000" VerticalAlignment="Center" Background="#5697d3" Margin="10,0,10,0"/>
+                    <Border x:Name="SetColorBox" Width="60" Background="#000000"  Margin="0,0,10,0" BorderThickness="3"  BorderBrush="#1e293c"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Update Buttons-->
+
+            <Button Grid.Row="4" Grid.Column="1" x:Name="UpdateColor" Click="UpdateColor_Click" Width="150" Content="Change Color" Margin="0,0,0,0"
+                    Background="#5697d3" Foreground="White" BorderThickness="2" BorderBrush="#1e293c"/>
+            <Button Grid.Row="4" Grid.Column="0" x:Name="UpdateEffect" Click="UpdateEffect_Click" Width="150" Content="Change Effect" Margin="0,0,0,0"
+                    Background="#5697d3" Foreground="White" BorderThickness="2" BorderBrush="#1e293c"/>
+
+
+        </Grid>
+
 
     </StackPanel>
 
