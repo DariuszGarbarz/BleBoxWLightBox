@@ -21,17 +21,6 @@ namespace WLightBoxApi.WebServices
             var uri = new Uri($"{_protocol}{_ipAdress}{_getRgbw}");
 
             return await GetService<RgbwResponse>(uri);
-
-            //HttpResponseMessage response = await _httpClient.GetAsync(uri);
-            //if (!response.IsSuccessStatusCode)
-            //{
-            //    throw new Exception("Communication Error");
-            //}
-            //var getResultsJson = response.Content.ReadAsStringAsync().Result;
-
-            //var rgbwResult = JsonConvert.DeserializeObject<RgbwResponse>(getResultsJson);
-
-            //return rgbwResult;
         }
     }
 }

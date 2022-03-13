@@ -1,9 +1,12 @@
-﻿namespace WLightBoxApi.Models
+﻿using Newtonsoft.Json;
+
+namespace WLightBoxApi.Models
 {
     public class RgbwChangeColor
     {
-        public string desiredColor { get; set; }
-        public DurationsMsChangeColor durationsMs { get; set; }
-    
-}
+        [JsonProperty("desiredColor")]
+        public string DesiredColor { get; set; }
+        [JsonProperty("durationsMs")]
+        public DurationsMsChangeColor DurationsMs { get; set; }
+    }
 }

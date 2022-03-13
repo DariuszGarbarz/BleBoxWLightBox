@@ -26,30 +26,14 @@ namespace WLightBoxApi.WebServices
         public async Task<RgbwResponse> PostRgbwChangeColorToApi()
         {
             RgbwChangeColorRequest rgbwContract = new RgbwChangeColorRequest();
-            rgbwContract.rgbw = new RgbwChangeColor();
-            rgbwContract.rgbw.durationsMs = new DurationsMsChangeColor();
-            rgbwContract.rgbw.desiredColor = _desiredColor;
-            rgbwContract.rgbw.durationsMs.colorFade = _colorFade;
+            rgbwContract.Rgbw = new RgbwChangeColor();
+            rgbwContract.Rgbw.DurationsMs = new DurationsMsChangeColor();
+            rgbwContract.Rgbw.DesiredColor = _desiredColor;
+            rgbwContract.Rgbw.DurationsMs.ColorFade = _colorFade;
 
             var uri = new Uri($"{_protocol}{_ipAdress}{_postRgbw}");
 
             return await PostService<RgbwResponse, RgbwChangeColorRequest>(uri, rgbwContract);
-
-            //var rgbwPost = JsonConvert.SerializeObject(rgbwContract);
-
-            //HttpResponseMessage response = await _httpClient.PostAsync(uri, new StringContent(rgbwPost, Encoding.UTF8, "application/json"));
-            //if (!response.IsSuccessStatusCode)
-            //{
-            //    throw new Exception("Communication Error");
-            //}
-            //var getResultsJson = response.Content.ReadAsStringAsync().Result;
-
-            //var rgbwResult = JsonConvert.DeserializeObject<RgbwResponse>(getResultsJson);
-
-            //return rgbwResult;
-
-
         }
-
     }
 }

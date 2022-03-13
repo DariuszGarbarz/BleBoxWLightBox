@@ -1,7 +1,10 @@
-﻿namespace WLightBoxApi.Models
+﻿using Newtonsoft.Json;
+
+namespace WLightBoxApi.Models
 {
     public class DurationsMsChangeColor
     {
-        public int colorFade { get; set; }
+        [JsonProperty("colorFade")]
+        public int ColorFade { get; set; }
     }
 }

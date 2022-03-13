@@ -1,8 +1,12 @@
-﻿namespace WLightBoxApi.Models
+﻿using Newtonsoft.Json;
+
+namespace WLightBoxApi.Models
 {
     public class DurationsMsChangeEffect
     {
-        public int effectFade { get; set; }
-        public int effectStep { get; set; }
+        [JsonProperty("effectFade")]
+        public int EffectFade { get; set; }
+        [JsonProperty("effectStep")]
+        public int EffectStep { get; set; }
     }
 }

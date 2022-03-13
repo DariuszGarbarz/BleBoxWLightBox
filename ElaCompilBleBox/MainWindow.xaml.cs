@@ -27,7 +27,7 @@ namespace ElaCompilBleBox
         {
             RadioButton rb = sender as RadioButton;
             //Sends Content of checked radiobutton to textblock. Im using this text block for effect id picking
-            this.EffectModeToSet.Text = (string)rb.Content;
+            EffectModeToSet.Text = (string)rb.Content;
         }
         // handlers for durationMs sliders
         /// <summary>
@@ -40,7 +40,7 @@ namespace ElaCompilBleBox
             //logic for visual represenation of Color Fade value, posted in textblock
             int val = Convert.ToInt32(e.NewValue);
             string msg = String.Format("Current value: {0}", val);
-            this.ColorFadeValue.Text = msg;
+            ColorFadeValue.Text = msg;
 
         }
         /// <summary>
@@ -53,7 +53,7 @@ namespace ElaCompilBleBox
             //logic for visual represenation of Effect Fade value, posted in textblock
             int val = Convert.ToInt32(e.NewValue);
             string msg = String.Format("Current value: {0}", val);
-            this.EffectFadeValue.Text = msg;
+            EffectFadeValue.Text = msg;
         }
         /// <summary>
         /// Event Handler for Effect Step slider.
@@ -65,7 +65,7 @@ namespace ElaCompilBleBox
             //logic for visual represenation of Effect step value, posted in textblock
             int val = Convert.ToInt32(e.NewValue);
             string msg = String.Format("Current value: {0}", val);
-            this.EffectStepValue.Text = msg;
+            EffectStepValue.Text = msg;
         }
         //handlers for RGB color setup sliders
         /// <summary>
@@ -78,9 +78,8 @@ namespace ElaCompilBleBox
             //logic for visual represenation of Color red value, posted in textblock
             int val = Convert.ToInt32(e.NewValue);
             string msg = String.Format("Current value: {0}", val);
-            this.RedValue.Text = msg;
+            RedValue.Text = msg;
 
-            //taking all rgb values and converts this from rgb string to hex string
             RgbwWwCwUpdate();
         }
         
@@ -94,9 +93,8 @@ namespace ElaCompilBleBox
             //logic for visual represenation of Color Green value, posted in textblock
             int val = Convert.ToInt32(e.NewValue);
             string msg = String.Format("Current value: {0}", val);
-            this.GreenValue.Text = msg;
+            GreenValue.Text = msg;
 
-            //taking all rgb values and converts this from rgb string to hex string
             RgbwWwCwUpdate();
         }
 
@@ -110,9 +108,8 @@ namespace ElaCompilBleBox
             //logic for visual represenation of Color Blue value, posted in textblock
             int val = Convert.ToInt32(e.NewValue);
             string msg = String.Format("Current value: {0}", val);
-            this.BlueValue.Text = msg;
-
-            //taking all rgb values and converts this from rgb string to hex string
+            BlueValue.Text = msg;
+            
             RgbwWwCwUpdate();
         }
 
@@ -121,9 +118,8 @@ namespace ElaCompilBleBox
             //logic for visual represenation of WW value, posted in textblock
             int val = Convert.ToInt32(e.NewValue);
             string msg = String.Format("Current value: {0}", val);
-            this.WWValue.Text = msg;
-
-            //taking all rgb values and converts this from rgb string to hex string
+            WWValue.Text = msg;
+            
             RgbwWwCwUpdate();
         }
 
@@ -132,14 +128,14 @@ namespace ElaCompilBleBox
             //logic for visual represenation of CW value, posted in textblock
             int val = Convert.ToInt32(e.NewValue);
             string msg = String.Format("Current value: {0}", val);
-            this.CWValue.Text = msg;
-
-            //taking all rgb values and converts this from rgb string to hex string
+            CWValue.Text = msg;
+           
             RgbwWwCwUpdate();
         }
 
         private void RgbwWwCwUpdate()
         {
+            //taking all rgb values and converts this from rgb string to hex string
             var redValue = Convert.ToInt32(this.RedStepSlider.Value);
             var greenValue = Convert.ToInt32(this.GreenStepSlider.Value);
             var blueValue = Convert.ToInt32(this.BlueStepSlider.Value);
@@ -156,7 +152,7 @@ namespace ElaCompilBleBox
             //converting hex string to brush and changing background of corelated border for visual representation of new color
             var converter = new BrushConverter();
             var brush = (Brush)converter.ConvertFromString($"#{hex}");
-            this.SetColorBox.Background = brush;
+            SetColorBox.Background = brush;
         }
 
 
@@ -171,18 +167,18 @@ namespace ElaCompilBleBox
         {
             //Creation of new httpclient and using it in GetInfo class together with ipAdress from related textbox
             HttpClient httpClient = HttpClientSetup.CreateHttpClient();
-            string ipAdress = this.DeviceAdress.Text;
+            string ipAdress = DeviceAdress.Text;
             GetInfo getInfo = new GetInfo(ipAdress, httpClient);
             try
             {
                 //Connection to device status Api 
                 DeviceResponse deviceStatus = await getInfo.GetInfoFromApi();
                 //Posting device status data to related textblocks
-                this.DeviceName.Text = deviceStatus.device.deviceName;
-                this.ProductName.Text = deviceStatus.device.product;
-                this.Hv.Text = deviceStatus.device.hv;
-                this.Fv.Text = deviceStatus.device.fv;
-                this.ActualDeviceAdress.Text = deviceStatus.device.ip;
+                DeviceName.Text = deviceStatus.Device.DeviceName;
+                ProductName.Text = deviceStatus.Device.Product;
+                Hv.Text = deviceStatus.Device.Hv;
+                Fv.Text = deviceStatus.Device.Fv;
+                ActualDeviceAdress.Text = deviceStatus.Device.Ip;
             }
             catch(AggregateException err)
             {
@@ -229,8 +225,8 @@ namespace ElaCompilBleBox
         {
             //Creation of new httpclient and using it in Post class together with ipAdress from related textbox
             HttpClient httpClient = HttpClientSetup.CreateHttpClient();
-            string ipAdress = this.DeviceAdress.Text;
-            PostRgbwChangeColor postRgbw = new PostRgbwChangeColor(ipAdress, httpClient, this.SetColor.Text, Convert.ToInt32(this.ColorFadeSlider.Value));
+            string ipAdress = DeviceAdress.Text;
+            PostRgbwChangeColor postRgbw = new PostRgbwChangeColor(ipAdress, httpClient, SetColor.Text, Convert.ToInt32(ColorFadeSlider.Value));
             try
             {
                 //Connection to State of Lightning Api
@@ -256,8 +252,8 @@ namespace ElaCompilBleBox
         {
             //Creation of new httpclient and using it in Post class together with ipAdress from related textbox
             HttpClient httpClient = HttpClientSetup.CreateHttpClient();
-            string ipAdress = this.DeviceAdress.Text;
-            PostRgbwChangeEffect postRgbw = new PostRgbwChangeEffect(ipAdress, httpClient, Convert.ToInt32(this.EffectFadeSlider.Value), Convert.ToInt32(this.EffectStepSlider.Value), Int32.Parse(this.EffectModeToSet.Text.Substring(0, 1)));
+            string ipAdress = DeviceAdress.Text;
+            PostRgbwChangeEffect postRgbw = new PostRgbwChangeEffect(ipAdress, httpClient, Convert.ToInt32(EffectFadeSlider.Value), Convert.ToInt32(EffectStepSlider.Value), Int32.Parse(this.EffectModeToSet.Text.Substring(0, 1)));
             try
             {
                 //Connection to State of Lightning Api
@@ -281,16 +277,16 @@ namespace ElaCompilBleBox
 
         private void UpdateStateOfLightning(RgbwResponse rgbwStatus)
         {
-            this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
-            this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
-            this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
-            this.ActualEffectFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectFade);
-            this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
-            this.ActualColor.Text = rgbwStatus.rgbw.currentColor;
+            this.ActualColorMode.Text = ColorModes[rgbwStatus.Rgbw.ColorMode];
+            this.ActualEffectId.Text = ColorEffects[rgbwStatus.Rgbw.EffectID];
+            this.ActualColorFade.Text = Convert.ToString(rgbwStatus.Rgbw.DurationsMs.ColorFade);
+            this.ActualEffectFade.Text = Convert.ToString(rgbwStatus.Rgbw.DurationsMs.EffectFade);
+            this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.Rgbw.DurationsMs.EffectStep);
+            this.ActualColor.Text = rgbwStatus.Rgbw.CurrentColor;
 
             //converting hex string to brush and changing background of corelated border for visual representation of current color
             var converter = new BrushConverter();
-            string actualColor = rgbwStatus.rgbw.currentColor.Substring(0, 6);
+            string actualColor = rgbwStatus.Rgbw.CurrentColor.Substring(0, 6);
 
             try
             {
@@ -305,7 +301,7 @@ namespace ElaCompilBleBox
         }
 
         //some values that could be usefull later
-        public string[] ColorModes = new string[] 
+        public string[] ColorModes = new string[]
         { 
             "OFF",
             "RGBW",
@@ -317,7 +313,7 @@ namespace ElaCompilBleBox
             "RGBWW"
         };
 
-        public string[] ColorEffects = new string[] 
+        public string[] ColorEffects = new string[]
         {
             "OFF",
             "Fade",

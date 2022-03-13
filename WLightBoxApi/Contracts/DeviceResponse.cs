@@ -1,4 +1,5 @@
-﻿using WLightBoxApi.Models;
+﻿using Newtonsoft.Json;
+using WLightBoxApi.Models;
 
 namespace WLightBoxApi.Contracts
 {
@@ -7,6 +8,7 @@ namespace WLightBoxApi.Contracts
     /// </summary>
     public class DeviceResponse
     {
-        public Device device { get; set; }
+        [JsonProperty("device")]
+        public Device Device { get; set; }
     }
 }

@@ -1,12 +1,20 @@
-﻿namespace WLightBoxApi.Models
+﻿using Newtonsoft.Json;
+
+namespace WLightBoxApi.Models
 {
     public class Rgbw
     {
-        public int colorMode { get; set; }
-        public int effectID { get; set; }
-        public string desiredColor { get; set; }
-        public string currentColor { get; set; }
-        public string lastOnColor { get; set; }
-        public DurationsMs durationsMs { get; set; }
+        [JsonProperty("colorMode")]
+        public int ColorMode { get; set; }
+        [JsonProperty("effectID")]
+        public int EffectID { get; set; }
+        [JsonProperty("desiredColor")]
+        public string DesiredColor { get; set; }
+        [JsonProperty("currentColor")]
+        public string CurrentColor { get; set; }
+        [JsonProperty("lastOnColor")]
+        public string LastOnColor { get; set; }
+        [JsonProperty("durationsMs")]
+        public DurationsMs DurationsMs { get; set; }
     }
 }

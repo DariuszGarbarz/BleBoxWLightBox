@@ -1,14 +1,24 @@
-﻿namespace WLightBoxApi.Models
+﻿using Newtonsoft.Json;
+
+namespace WLightBoxApi.Models
 {
     public class Device
     {
-        public string deviceName { get; set; }
-        public string product { get; set; }
-        public string type { get; set; }
-        public string apiLevel { get; set; }
-        public string hv { get; set; }
-        public string fv { get; set; }
-        public string id { get; set; }
-        public string ip { get; set; }
+        [JsonProperty("deviceName")]
+        public string DeviceName { get; set; }
+        [JsonProperty("product")]
+        public string Product { get; set; }
+        [JsonProperty("type")]
+        public string Type { get; set; }
+        [JsonProperty("apiLevel")]
+        public string ApiLevel { get; set; }
+        [JsonProperty("hv")]
+        public string Hv { get; set; }
+        [JsonProperty("fv")]
+        public string Fv { get; set; }
+        [JsonProperty("id")]
+        public string Id { get; set; }
+        [JsonProperty("ip")]
+        public string Ip { get; set; }
     }
 }

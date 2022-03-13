@@ -14,16 +14,16 @@ namespace WLightBoxApiTest
 
             var expected = new DeviceResponse()
             {
-                device = new WLightBoxApi.Models.Device()
+                Device = new WLightBoxApi.Models.Device()
                 {
-                    deviceName = "Postman Test",
-                    product = "wLightBox_test",
-                    type = "wLightBoxTest",
-                    apiLevel = "20200518",
-                    hv = "9.9test",
-                    fv = "1.1test",
-                    id = "g650e32d2217",
-                    ip = "192.168.1.11"
+                    DeviceName = "Postman Test",
+                    Product = "wLightBox_test",
+                    Type = "wLightBoxTest",
+                    ApiLevel = "20200518",
+                    Hv = "9.9test",
+                    Fv = "1.1test",
+                    Id = "g650e32d2217",
+                    Ip = "192.168.1.11"
                 }
             };
 
@@ -35,14 +35,14 @@ namespace WLightBoxApiTest
 
             //assert
 
-            Assert.AreEqual(expected.device.deviceName, actual.device.deviceName);
-            Assert.AreEqual(expected.device.product, actual.device.product);
-            Assert.AreEqual(expected.device.type, actual.device.type);
-            Assert.AreEqual(expected.device.apiLevel, actual.device.apiLevel);
-            Assert.AreEqual(expected.device.hv, actual.device.hv);
-            Assert.AreEqual(expected.device.fv, actual.device.fv);
-            Assert.AreEqual(expected.device.id, actual.device.id);
-            Assert.AreEqual(expected.device.ip, actual.device.ip);
+            Assert.AreEqual(expected.Device.DeviceName, actual.Device.DeviceName);
+            Assert.AreEqual(expected.Device.Product, actual.Device.Product);
+            Assert.AreEqual(expected.Device.Type, actual.Device.Type);
+            Assert.AreEqual(expected.Device.ApiLevel, actual.Device.ApiLevel);
+            Assert.AreEqual(expected.Device.Hv, actual.Device.Hv);
+            Assert.AreEqual(expected.Device.Fv, actual.Device.Fv);
+            Assert.AreEqual(expected.Device.Id, actual.Device.Id);
+            Assert.AreEqual(expected.Device.Ip, actual.Device.Ip);
 
         }
     }

@@ -13,7 +13,7 @@ namespace WLightBoxApiTest
             //arrange
             var expected = new UptimeResponse()
             {
-                upTimeS = 11111
+                UpTimeS = 11111
             };
 
             var getUptime = new GetUptime(Settings.mockServerAdress, Settings.httpClient);
@@ -24,7 +24,7 @@ namespace WLightBoxApiTest
 
             //assert
 
-            Assert.AreEqual(expected.upTimeS, actual.upTimeS);
+            Assert.AreEqual(expected.UpTimeS, actual.UpTimeS);
         }
     }
 }

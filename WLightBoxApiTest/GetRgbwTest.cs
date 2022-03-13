@@ -13,18 +13,18 @@ namespace WLightBoxApiTest
             //arrange
             var expected = new RgbwResponse()
             {
-                rgbw = new WLightBoxApi.Models.Rgbw()
+                Rgbw = new WLightBoxApi.Models.Rgbw()
                 {
-                    colorMode = 1,
-                    effectID = 5,
-                    desiredColor = "ffff300000",
-                    currentColor = "ffff300000",
-                    lastOnColor = "ffff300000",
-                    durationsMs = new WLightBoxApi.Models.DurationsMs()
+                    ColorMode = 1,
+                    EffectID = 5,
+                    DesiredColor = "ffff300000",
+                    CurrentColor = "ffff300000",
+                    LastOnColor = "ffff300000",
+                    DurationsMs = new WLightBoxApi.Models.DurationsMs()
                     {
-                        colorFade = 500,
-                        effectFade = 3000,
-                        effectStep = 60000
+                        ColorFade = 500,
+                        EffectFade = 3000,
+                        EffectStep = 60000
                     }
                 }
             };
@@ -37,14 +37,14 @@ namespace WLightBoxApiTest
 
             //assert
 
-            Assert.AreEqual(expected.rgbw.colorMode, actual.rgbw.colorMode);
-            Assert.AreEqual(expected.rgbw.effectID, actual.rgbw.effectID);
-            Assert.AreEqual(expected.rgbw.desiredColor, actual.rgbw.desiredColor);
-            Assert.AreEqual(expected.rgbw.currentColor, actual.rgbw.currentColor);
-            Assert.AreEqual(expected.rgbw.lastOnColor, actual.rgbw.lastOnColor);
-            Assert.AreEqual(expected.rgbw.durationsMs.colorFade, actual.rgbw.durationsMs.colorFade);
-            Assert.AreEqual(expected.rgbw.durationsMs.effectFade, actual.rgbw.durationsMs.effectFade);
-            Assert.AreEqual(expected.rgbw.durationsMs.effectStep, actual.rgbw.durationsMs.effectStep);
+            Assert.AreEqual(expected.Rgbw.ColorMode, actual.Rgbw.ColorMode);
+            Assert.AreEqual(expected.Rgbw.EffectID, actual.Rgbw.EffectID);
+            Assert.AreEqual(expected.Rgbw.DesiredColor, actual.Rgbw.DesiredColor);
+            Assert.AreEqual(expected.Rgbw.CurrentColor, actual.Rgbw.CurrentColor);
+            Assert.AreEqual(expected.Rgbw.LastOnColor, actual.Rgbw.LastOnColor);
+            Assert.AreEqual(expected.Rgbw.DurationsMs.ColorFade, actual.Rgbw.DurationsMs.ColorFade);
+            Assert.AreEqual(expected.Rgbw.DurationsMs.EffectFade, actual.Rgbw.DurationsMs.EffectFade);
+            Assert.AreEqual(expected.Rgbw.DurationsMs.EffectStep, actual.Rgbw.DurationsMs.EffectStep);
 
 
         }

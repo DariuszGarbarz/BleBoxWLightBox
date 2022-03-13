@@ -17,23 +17,10 @@ namespace WLightBoxApi.WebServices
         }
 
         public async Task<UptimeResponse> GetUptimeFromApi()
-        {           
+        {
             var uri = new Uri($"{_protocol}{_ipAdress}{_getUptime}");
 
             return await GetService<UptimeResponse>(uri);
-
-
-            //HttpResponseMessage response = _httpClient.GetAsync(uri).Result;
-            //if (!response.IsSuccessStatusCode)
-            //{
-            //    throw new Exception("Communication Error");
-            //}
-
-            //var getResultsJson = response.Content.ReadAsStringAsync().Result;
-
-            //var uptimeResult = JsonConvert.DeserializeObject<UptimeResponse>(getResultsJson);
-
-            //return uptimeResult;
         }
     }
 }

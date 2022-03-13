@@ -26,31 +26,16 @@ namespace WLightBoxApi.WebServices
         public async Task<RgbwResponse> PostRgbwChangeEffectToApi()
         {
             RgbwChangeEffectRequest rgbwContract = new RgbwChangeEffectRequest();
-            rgbwContract.rgbw = new RgbwChangeEffect();
-            rgbwContract.rgbw.durationsMs = new DurationsMsChangeEffect();
+            rgbwContract.Rgbw = new RgbwChangeEffect();
+            rgbwContract.Rgbw.DurationsMs = new DurationsMsChangeEffect();
 
-            rgbwContract.rgbw.durationsMs.effectFade = _effectFade;
-            rgbwContract.rgbw.durationsMs.effectStep = _effectStep;
-            rgbwContract.rgbw.effectID = _effectId;
+            rgbwContract.Rgbw.DurationsMs.EffectFade = _effectFade;
+            rgbwContract.Rgbw.DurationsMs.EffectStep = _effectStep;
+            rgbwContract.Rgbw.EffectID = _effectId;
 
             var uri = new Uri($"{_protocol}{_ipAdress}{_postRgbw}");
 
             return await PostService<RgbwResponse, RgbwChangeEffectRequest>(uri, rgbwContract);
-
-            //var rgbwPost = JsonConvert.SerializeObject(rgbwContract);
-
-            //HttpResponseMessage response = await _httpClient.PostAsync(uri, new StringContent(rgbwPost, Encoding.UTF8, "application/json"));
-            //if (!response.IsSuccessStatusCode)
-            //{
-            //    throw new Exception("Communication Error");
-            //}
-            //var getResultsJson = response.Content.ReadAsStringAsync().Result;
-
-            //var rgbwResult = JsonConvert.DeserializeObject<RgbwResponse>(getResultsJson);
-
-            //return rgbwResult;
-
-
         }
     }
 }

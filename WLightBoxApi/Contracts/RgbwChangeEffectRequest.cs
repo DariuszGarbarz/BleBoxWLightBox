@@ -1,4 +1,5 @@
-﻿using WLightBoxApi.Models;
+﻿using Newtonsoft.Json;
+using WLightBoxApi.Models;
 
 namespace WLightBoxApi.Contracts
 {
@@ -7,6 +8,7 @@ namespace WLightBoxApi.Contracts
     /// </summary>
     public class RgbwChangeEffectRequest
     {
-        public RgbwChangeEffect rgbw { get; set; }
+        [JsonProperty("rgbw")]
+        public RgbwChangeEffect Rgbw { get; set; }
     }
 }
