@@ -182,15 +182,15 @@ namespace ElaCompilBleBox
             }
             catch(AggregateException err)
             {
-                MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
+                MessageBox.Show(err.Message, "Error");
             }
             catch (HttpRequestException err)
             {
-                MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
+                MessageBox.Show(err.Message, "Error");
             }
             catch (Exception)
             {
-                MessageBoxResult msgbox = MessageBox.Show("Cannot connect to device", "Error");
+                MessageBox.Show("Cannot connect to device", "Error");
             }
 
             //New GetRgbw class that is using previously created httpclient and ip adress
@@ -204,15 +204,15 @@ namespace ElaCompilBleBox
             }
             catch (AggregateException err)
             {
-                MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
+                MessageBox.Show(err.Message, "Error");
             }
             catch (HttpRequestException err)
             {
-                MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
+                MessageBox.Show(err.Message, "Error");
             }
             catch (Exception)
             {
-                MessageBoxResult msgbox = MessageBox.Show("Cannot connect to device", "Error");
+                MessageBox.Show("Cannot connect to device", "Error");
             }
         }
 
@@ -236,15 +236,15 @@ namespace ElaCompilBleBox
             }
             catch(AggregateException err)
             {
-                MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
+                MessageBox.Show(err.Message, "Error");
             }
             catch (HttpRequestException err)
             {
-                MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
+                MessageBox.Show(err.Message, "Error");
             }
             catch (Exception)
             {
-                MessageBoxResult msgbox = MessageBox.Show("Cannot connect to device", "Error");
+                MessageBox.Show("Cannot connect to device", "Error");
             }
         }
 
@@ -263,26 +263,26 @@ namespace ElaCompilBleBox
             }
             catch (AggregateException err)
             {
-                MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
+                MessageBox.Show(err.Message, "Error");
             }
             catch (HttpRequestException err)
             {
-                MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
+                MessageBox.Show(err.Message, "Error");
             }
             catch (Exception)
             {
-                MessageBoxResult msgbox = MessageBox.Show("Cannot connect to device", "Error");
+                MessageBox.Show("Cannot connect to device", "Error");
             }
         }
 
         private void UpdateStateOfLightning(RgbwResponse rgbwStatus)
         {
-            this.ActualColorMode.Text = ColorModes[rgbwStatus.Rgbw.ColorMode];
-            this.ActualEffectId.Text = ColorEffects[rgbwStatus.Rgbw.EffectID];
-            this.ActualColorFade.Text = Convert.ToString(rgbwStatus.Rgbw.DurationsMs.ColorFade);
-            this.ActualEffectFade.Text = Convert.ToString(rgbwStatus.Rgbw.DurationsMs.EffectFade);
-            this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.Rgbw.DurationsMs.EffectStep);
-            this.ActualColor.Text = rgbwStatus.Rgbw.CurrentColor;
+            ActualColorMode.Text = ColorModes[rgbwStatus.Rgbw.ColorMode];
+            ActualEffectId.Text = ColorEffects[rgbwStatus.Rgbw.EffectID];
+            ActualColorFade.Text = Convert.ToString(rgbwStatus.Rgbw.DurationsMs.ColorFade);
+            ActualEffectFade.Text = Convert.ToString(rgbwStatus.Rgbw.DurationsMs.EffectFade);
+            ActualEffectStep.Text = Convert.ToString(rgbwStatus.Rgbw.DurationsMs.EffectStep);
+            ActualColor.Text = rgbwStatus.Rgbw.CurrentColor;
 
             //converting hex string to brush and changing background of corelated border for visual representation of current color
             var converter = new BrushConverter();
@@ -291,12 +291,12 @@ namespace ElaCompilBleBox
             try
             {
                 var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
-                this.ActualColorBox.Background = brush;
+                ActualColorBox.Background = brush;
             }
 
             catch (NotSupportedException)
             {
-                MessageBoxResult msgbox = MessageBox.Show("Provided color format is not supported", "Error");
+                MessageBox.Show("Provided color format is not supported", "Error");
             }
         }
 
