@@ -16,7 +16,6 @@ namespace ElaCompilBleBox
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
         /// <summary>
@@ -30,7 +29,6 @@ namespace ElaCompilBleBox
             //Sends Content of checked radiobutton to textblock. Im using this text block for effect id picking
             this.EffectModeToSet.Text = (string)rb.Content;
         }
-
         // handlers for durationMs sliders
         /// <summary>
         /// Event Handler for Color fade slider.
@@ -69,7 +67,6 @@ namespace ElaCompilBleBox
             string msg = String.Format("Current value: {0}", val);
             this.EffectStepValue.Text = msg;
         }
-
         //handlers for RGB color setup sliders
         /// <summary>
         /// Event handler for Red color slider
@@ -84,24 +81,7 @@ namespace ElaCompilBleBox
             this.RedValue.Text = msg;
 
             //taking all rgb values and converts this from rgb string to hex string
-            var redValue = Convert.ToInt32(this.RedStepSlider.Value);
-            var greenValue = Convert.ToInt32(this.GreenStepSlider.Value);
-            var blueValue = Convert.ToInt32(this.BlueStepSlider.Value);
-            System.Drawing.Color myColor = System.Drawing.Color.FromArgb(redValue, greenValue, blueValue);
-            string hex = myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2");
-
-            var wwValue = Convert.ToInt32(this.WWSlider.Value);
-            var cwValue = Convert.ToInt32(this.CWSlider.Value);
-            string light = wwValue.ToString("X2") + cwValue.ToString("X2");
-
-            //posting complete rgb color value in hex to textblock
-            SetColor.Text = $"{hex}{light}";
-
-            //converting hex string to brush and changing background of corelated border for visual representation of new color
-            var converter = new BrushConverter();          
-            var brush = (Brush)converter.ConvertFromString($"#{hex}");
-            this.SetColorBox.Background = brush;
-
+            RgbwWwCwUpdate();
         }
         
         /// <summary>
@@ -117,23 +97,7 @@ namespace ElaCompilBleBox
             this.GreenValue.Text = msg;
 
             //taking all rgb values and converts this from rgb string to hex string
-            var redValue = Convert.ToInt32(this.RedStepSlider.Value);
-            var greenValue = Convert.ToInt32(this.GreenStepSlider.Value);
-            var blueValue = Convert.ToInt32(this.BlueStepSlider.Value);
-            System.Drawing.Color myColor = System.Drawing.Color.FromArgb(redValue, greenValue, blueValue);
-            string hex = myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2");
-
-            var wwValue = Convert.ToInt32(this.WWSlider.Value);
-            var cwValue = Convert.ToInt32(this.CWSlider.Value);
-            string light = wwValue.ToString("X2") + cwValue.ToString("X2");
-
-            //posting complete rgb color value in hex to textblock
-            SetColor.Text = $"{hex}{light}";
-
-            //converting hex string to brush and changing background of corelated border for visual representation of new color
-            var converter = new BrushConverter();
-            var brush = (Brush)converter.ConvertFromString($"#{hex}");
-            this.SetColorBox.Background = brush;
+            RgbwWwCwUpdate();
         }
 
         /// <summary>
@@ -149,23 +113,7 @@ namespace ElaCompilBleBox
             this.BlueValue.Text = msg;
 
             //taking all rgb values and converts this from rgb string to hex string
-            var redValue = Convert.ToInt32(this.RedStepSlider.Value);
-            var greenValue = Convert.ToInt32(this.GreenStepSlider.Value);
-            var blueValue = Convert.ToInt32(this.BlueStepSlider.Value);
-            System.Drawing.Color myColor = System.Drawing.Color.FromArgb(redValue, greenValue, blueValue);
-            string hex = myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2");
-
-            var wwValue = Convert.ToInt32(this.WWSlider.Value);
-            var cwValue = Convert.ToInt32(this.CWSlider.Value);
-            string light = wwValue.ToString("X2") + cwValue.ToString("X2");
-
-            //posting complete rgb color value in hex to textblock
-            SetColor.Text = $"{hex}{light}";
-
-            //converting hex string to brush and changing background of corelated border for visual representation of new color
-            var converter = new BrushConverter();
-            var brush = (Brush)converter.ConvertFromString($"#{hex}");
-            this.SetColorBox.Background = brush;
+            RgbwWwCwUpdate();
         }
 
         private void WWSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -176,23 +124,7 @@ namespace ElaCompilBleBox
             this.WWValue.Text = msg;
 
             //taking all rgb values and converts this from rgb string to hex string
-            var redValue = Convert.ToInt32(this.RedStepSlider.Value);
-            var greenValue = Convert.ToInt32(this.GreenStepSlider.Value);
-            var blueValue = Convert.ToInt32(this.BlueStepSlider.Value);
-            System.Drawing.Color myColor = System.Drawing.Color.FromArgb(redValue, greenValue, blueValue);
-            string hex = myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2");
-
-            var wwValue = Convert.ToInt32(this.WWSlider.Value);
-            var cwValue = Convert.ToInt32(this.CWSlider.Value);
-            string light = wwValue.ToString("X2") + cwValue.ToString("X2");
-
-            //posting complete rgb color value in hex to textblock
-            SetColor.Text = $"{hex}{light}";
-
-            //converting hex string to brush and changing background of corelated border for visual representation of new color
-            var converter = new BrushConverter();
-            var brush = (Brush)converter.ConvertFromString($"#{hex}");
-            this.SetColorBox.Background = brush;
+            RgbwWwCwUpdate();
         }
 
         private void CWSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -203,6 +135,11 @@ namespace ElaCompilBleBox
             this.CWValue.Text = msg;
 
             //taking all rgb values and converts this from rgb string to hex string
+            RgbwWwCwUpdate();
+        }
+
+        private void RgbwWwCwUpdate()
+        {
             var redValue = Convert.ToInt32(this.RedStepSlider.Value);
             var greenValue = Convert.ToInt32(this.GreenStepSlider.Value);
             var blueValue = Convert.ToInt32(this.BlueStepSlider.Value);
@@ -251,7 +188,7 @@ namespace ElaCompilBleBox
             {
                 MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
             }
-            catch (System.Net.Http.HttpRequestException err)
+            catch (HttpRequestException err)
             {
                 MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
             }
@@ -267,33 +204,13 @@ namespace ElaCompilBleBox
                 //Connection to State of Lightning Api
                 RgbwResponse rgbwStatus = await getRgbw.GetRgbwFromApi();
                 //Posting State of Lightning data to related textblocks
-                this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
-                this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
-                this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
-                this.ActualEffectFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectFade);
-                this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
-                this.ActualColor.Text = rgbwStatus.rgbw.currentColor;
-
-                //converting hex string to brush and changing background of corelated border for visual representation of current color
-                var converter = new BrushConverter();
-                string actualColor = rgbwStatus.rgbw.currentColor.Substring(0, 6);
-
-                try
-                {
-                    var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
-                    this.ActualColorBox.Background = brush;
-                }
-
-                catch (NotSupportedException)
-                {
-                    MessageBoxResult msgbox = MessageBox.Show("Provided color format is not supported", "Error");
-                }
+                UpdateStateOfLightning(rgbwStatus);
             }
             catch (AggregateException err)
             {
                 MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
             }
-            catch (System.Net.Http.HttpRequestException err)
+            catch (HttpRequestException err)
             {
                 MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
             }
@@ -319,33 +236,13 @@ namespace ElaCompilBleBox
                 //Connection to State of Lightning Api
                 RgbwResponse rgbwStatus = await postRgbw.PostRgbwChangeColorToApi();
                 //Posting State of Lightning data to related textblocks
-                this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
-                this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
-                this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
-                this.ActualEffectFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectFade);
-                this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
-                this.ActualColor.Text = rgbwStatus.rgbw.currentColor;
-
-                //converting hex string to brush and changing background of corelated border for visual representation of current color
-                var converter = new BrushConverter();
-                string actualColor = rgbwStatus.rgbw.currentColor.Substring(0, 6);
-
-                try
-                {
-                    var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
-                    this.ActualColorBox.Background = brush;
-                }
-
-                catch (NotSupportedException)
-                {
-                    MessageBoxResult msgbox = MessageBox.Show("Provided color format is not supported", "Error");
-                }
+                UpdateStateOfLightning(rgbwStatus);
             }
             catch(AggregateException err)
             {
                 MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
             }
-            catch (System.Net.Http.HttpRequestException err)
+            catch (HttpRequestException err)
             {
                 MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
             }
@@ -353,13 +250,10 @@ namespace ElaCompilBleBox
             {
                 MessageBoxResult msgbox = MessageBox.Show("Cannot connect to device", "Error");
             }
-
-
         }
 
         private async void UpdateEffect_Click(object sender, RoutedEventArgs e)
         {
-
             //Creation of new httpclient and using it in Post class together with ipAdress from related textbox
             HttpClient httpClient = HttpClientSetup.CreateHttpClient();
             string ipAdress = this.DeviceAdress.Text;
@@ -369,33 +263,13 @@ namespace ElaCompilBleBox
                 //Connection to State of Lightning Api
                 RgbwResponse rgbwStatus = await postRgbw.PostRgbwChangeEffectToApi();
                 //Posting State of Lightning data to related textblocks
-                this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
-                this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
-                this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
-                this.ActualEffectFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectFade);
-                this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
-                this.ActualColor.Text = rgbwStatus.rgbw.currentColor;
-
-                //converting hex string to brush and changing background of corelated border for visual representation of current color
-                var converter = new BrushConverter();
-                string actualColor = rgbwStatus.rgbw.currentColor.Substring(0, 6);
-
-                try
-                {
-                    var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
-                    this.ActualColorBox.Background = brush;
-                }
-
-                catch (NotSupportedException)
-                {
-                    MessageBoxResult msgbox = MessageBox.Show("Provided color format is not supported", "Error");
-                }
+                UpdateStateOfLightning(rgbwStatus);
             }
             catch (AggregateException err)
             {
                 MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
             }
-            catch (System.Net.Http.HttpRequestException err)
+            catch (HttpRequestException err)
             {
                 MessageBoxResult msgbox = MessageBox.Show(err.Message, "Error");
             }
@@ -403,26 +277,56 @@ namespace ElaCompilBleBox
             {
                 MessageBoxResult msgbox = MessageBox.Show("Cannot connect to device", "Error");
             }
-
         }
 
-        //some values that could be usefull later  -----i should change this description later
-        public string[] ColorModes = new string[] {"OFF",
+        private void UpdateStateOfLightning(RgbwResponse rgbwStatus)
+        {
+            this.ActualColorMode.Text = ColorModes[rgbwStatus.rgbw.colorMode];
+            this.ActualEffectId.Text = ColorEffects[rgbwStatus.rgbw.effectID];
+            this.ActualColorFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.colorFade);
+            this.ActualEffectFade.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectFade);
+            this.ActualEffectStep.Text = Convert.ToString(rgbwStatus.rgbw.durationsMs.effectStep);
+            this.ActualColor.Text = rgbwStatus.rgbw.currentColor;
+
+            //converting hex string to brush and changing background of corelated border for visual representation of current color
+            var converter = new BrushConverter();
+            string actualColor = rgbwStatus.rgbw.currentColor.Substring(0, 6);
+
+            try
+            {
+                var brush = (Brush)converter.ConvertFromString($"#{actualColor}");
+                this.ActualColorBox.Background = brush;
+            }
+
+            catch (NotSupportedException)
+            {
+                MessageBoxResult msgbox = MessageBox.Show("Provided color format is not supported", "Error");
+            }
+        }
+
+        //some values that could be usefull later
+        public string[] ColorModes = new string[] 
+        { 
+            "OFF",
             "RGBW",
             "RGB",
             "MONO",
             "RGBorW",
             "CT",
             "CTx2",
-            "RGBWW"};
+            "RGBWW"
+        };
 
-        public string[] ColorEffects = new string[] {"OFF",
+        public string[] ColorEffects = new string[] 
+        {
+            "OFF",
             "Fade",
             "RGB",
             "Police",
             "Relax",
             "Strobo",
-            "Bell" };
+            "Bell" 
+        };
 
         public enum ColorModeEnum
         {
