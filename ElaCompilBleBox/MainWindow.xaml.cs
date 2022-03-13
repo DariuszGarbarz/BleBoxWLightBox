@@ -253,7 +253,7 @@ namespace ElaCompilBleBox
             //Creation of new httpclient and using it in Post class together with ipAdress from related textbox
             HttpClient httpClient = HttpClientSetup.CreateHttpClient();
             string ipAdress = DeviceAdress.Text;
-            PostRgbwChangeEffect postRgbw = new PostRgbwChangeEffect(ipAdress, httpClient, Convert.ToInt32(EffectFadeSlider.Value), Convert.ToInt32(EffectStepSlider.Value), Int32.Parse(this.EffectModeToSet.Text.Substring(0, 1)));
+            PostRgbwChangeEffect postRgbw = new PostRgbwChangeEffect(ipAdress, httpClient, Convert.ToInt32(EffectFadeSlider.Value), Convert.ToInt32(EffectStepSlider.Value), Int32.Parse(EffectModeToSet.Text.Substring(0, 1)));
             try
             {
                 //Connection to State of Lightning Api
