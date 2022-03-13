@@ -25,23 +25,19 @@ namespace WLightBoxApi.WebServices
         /// </summary>
         /// <returns>Complete DeviceModel</returns>
         public async Task<DeviceResponse> GetInfoFromApi()
-        {
-            
-            var uri = new Uri($"https://{_ipAdress}/info");
-            
-            HttpResponseMessage response = await _httpClient.GetAsync(uri);
+        {    
+            var uri = new Uri($"{_protocol}{_ipAdress}{_getInfo}");
 
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("Communication Error");
-            }
-            var getResultsJson = response.Content.ReadAsStringAsync().Result;
-
-            var deviceResult = JsonConvert.DeserializeObject<DeviceResponse>(getResultsJson);
-
-            return deviceResult;
+            return await GetService<DeviceResponse>(uri);
             
-            
+            //HttpResponseMessage response = await _httpClient.GetAsync(uri);
+            //if (!response.IsSuccessStatusCode)
+            //{
+            //    throw new Exception("Communication Error");
+            //}
+            //var getResultsJson = response.Content.ReadAsStringAsync().Result;
+            //var deviceResult = JsonConvert.DeserializeObject<DeviceResponse>(getResultsJson);
+            //return deviceResult;    
         }
 
     }

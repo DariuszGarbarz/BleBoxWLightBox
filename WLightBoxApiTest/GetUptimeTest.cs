@@ -20,7 +20,7 @@ namespace WLightBoxApiTest
 
             //act
 
-            var actual = getUptime.GetUptimeFromApi();
+            var actual = getUptime.GetUptimeFromApi().Result;
 
             //assert
 

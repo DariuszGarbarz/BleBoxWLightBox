@@ -17,20 +17,21 @@ namespace WLightBoxApi.WebServices
         }
 
         public async Task<RgbwResponse> GetRgbwFromApi()
-        {
-            
-            var uri = new Uri($"https://{_ipAdress}/api/rgbw/state");
+        {           
+            var uri = new Uri($"{_protocol}{_ipAdress}{_getRgbw}");
 
-            HttpResponseMessage response = await _httpClient.GetAsync(uri);
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("Communication Error");
-            }
-            var getResultsJson = response.Content.ReadAsStringAsync().Result;
+            return await GetService<RgbwResponse>(uri);
 
-            var rgbwResult = JsonConvert.DeserializeObject<RgbwResponse>(getResultsJson);
+            //HttpResponseMessage response = await _httpClient.GetAsync(uri);
+            //if (!response.IsSuccessStatusCode)
+            //{
+            //    throw new Exception("Communication Error");
+            //}
+            //var getResultsJson = response.Content.ReadAsStringAsync().Result;
 
-            return rgbwResult;
+            //var rgbwResult = JsonConvert.DeserializeObject<RgbwResponse>(getResultsJson);
+
+            //return rgbwResult;
         }
     }
 }

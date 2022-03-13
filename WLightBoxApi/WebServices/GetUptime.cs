@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using WLightBoxApi.Contracts;
 
 namespace WLightBoxApi.WebServices
@@ -15,22 +16,24 @@ namespace WLightBoxApi.WebServices
 
         }
 
-        public UptimeResponse GetUptimeFromApi()
-        {
-            
-            var uri = new Uri($"https://{_ipAdress}/api/device/uptime");
+        public async Task<UptimeResponse> GetUptimeFromApi()
+        {           
+            var uri = new Uri($"{_protocol}{_ipAdress}{_getUptime}");
 
-            HttpResponseMessage response = _httpClient.GetAsync(uri).Result;
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("Communication Error");
-            }
+            return await GetService<UptimeResponse>(uri);
 
-            var getResultsJson = response.Content.ReadAsStringAsync().Result;
 
-            var uptimeResult = JsonConvert.DeserializeObject<UptimeResponse>(getResultsJson);
+            //HttpResponseMessage response = _httpClient.GetAsync(uri).Result;
+            //if (!response.IsSuccessStatusCode)
+            //{
+            //    throw new Exception("Communication Error");
+            //}
 
-            return uptimeResult;
+            //var getResultsJson = response.Content.ReadAsStringAsync().Result;
+
+            //var uptimeResult = JsonConvert.DeserializeObject<UptimeResponse>(getResultsJson);
+
+            //return uptimeResult;
         }
     }
 }
